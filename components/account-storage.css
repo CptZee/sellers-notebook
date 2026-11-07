@@ -1,0 +1,107 @@
+.account-storage {
+    padding: 18px;
+    margin: 16px 0;
+    background: #f3f3e6;
+    border: 1px solid #d2d9c3;
+    border-radius: 5px 10px 5px 5px;
+    color: #46644b;
+}
+
+.storage-heading {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.storage-heading h3 {
+    font-family: var(--hand);
+    font-size: 23px;
+    line-height: 1.1;
+    margin: 0;
+}
+
+.storage-heading > .icon-button {
+    margin-left: auto;
+    flex-shrink: 0;
+}
+
+.storage-totals {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin: 17px 0 10px;
+    flex-wrap: wrap;
+    font-size: 12px;
+}
+
+.storage-explainer,
+.storage-pending p {
+    font-size: 11px;
+    line-height: 1.8;
+    margin: 10px 0;
+    color: #66765e;
+}
+
+.storage-error {
+    font-size: 12px;
+    line-height: 1.8;
+    color: #8e573a;
+    margin: 12px 0;
+}
+
+.storage-error > .text-button {
+    margin-left: 12px;
+}
+
+.account-storage > .text-button,
+.storage-pending > .text-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 11px;
+    margin-top: 7px;
+}
+
+.account-storage.compact {
+    margin: 0 24px 22px;
+}
+
+.storage-pending {
+    padding-top: 9px;
+    margin-top: 12px;
+    border-top: 1px dashed #cad3ba;
+}
+
+html[data-theme="dark"] .account-storage {
+    background: #2c3731;
+    color: #d6e4cf;
+    border-color: #52674d;
+}
+
+html[data-theme="dark"] .storage-explainer,
+html[data-theme="dark"] .storage-pending p {
+    color: #b9c9b1;
+}
+
+html[data-theme="dark"] .storage-error {
+    color: #edbf97;
+}
+
+@media (max-width: 600px) {
+    .account-storage {
+        padding: 15px;
+    }
+
+    .account-storage.compact {
+        margin: 0 16px 18px;
+    }
+
+    .storage-totals {
+        gap: 8px;
+    }
+
+    .storage-heading h3 {
+        font-size: 22px;
+    }
+}

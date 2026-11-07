@@ -1,0 +1,592 @@
+.notebook-tour-trigger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    flex-shrink: 0;
+    min-height: 36px;
+    padding: 8px 11px;
+    border: 1px solid #ccd5bc;
+    border-radius: 5px 9px 5px 5px;
+    background: #f1f3e5;
+    color: #466d50;
+    font: inherit;
+    font-size: 11px;
+}
+
+.notebook-tour-center.rc-tour {
+    position: fixed !important;
+    left: 50% !important;
+    top: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 360px;
+    max-width: calc(100vw - 24px);
+}
+
+.notebook-tour-welcome {
+    display: flex;
+    align-items: center;
+    gap: 17px;
+    margin: 0 0 24px;
+    padding: 20px 22px;
+    border: 1px dashed #b9c8a4;
+    border-radius: 5px 12px 5px 5px;
+    background: #edf1df;
+    color: #46644b;
+}
+
+.notebook-tour-welcome > svg {
+    flex-shrink: 0;
+}
+
+.notebook-tour-welcome h2 {
+    font-family: var(--hand);
+    font-size: 27px;
+    margin: 0 0 5px;
+}
+
+.notebook-tour-welcome p {
+    font-size: 12px;
+    line-height: 1.7;
+    margin: 0;
+    color: #66765c;
+}
+
+.notebook-tour-welcome-actions {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    margin-left: auto;
+    flex-shrink: 0;
+}
+
+.notebook-tour-welcome-actions .button {
+    font-size: 12px;
+}
+
+.notebook-tour.rc-tour {
+    position: absolute;
+    width: 360px;
+    max-width: calc(100vw - 24px);
+}
+
+.notebook-tour-panel {
+    width: 360px;
+    max-width: calc(100vw - 24px);
+    max-height: calc(100dvh - 32px);
+    overflow-y: auto;
+    padding: 22px;
+    background: #fcfaef;
+    border: 1px solid #bbc8a9;
+    border-radius: 7px 16px 7px 7px;
+    color: #364a3f;
+    box-shadow: 0 12px 42px #17241b40;
+    outline: none;
+}
+
+.notebook-tour-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #6c825c;
+    font-size: 9px;
+    letter-spacing: 1.6px;
+}
+
+.notebook-tour-eyebrow .icon-button {
+    margin-left: auto;
+    flex-shrink: 0;
+    color: inherit;
+    width: 32px;
+    height: 32px;
+}
+
+.notebook-tour-panel h2 {
+    font-family: var(--hand);
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 1.12;
+    margin: 14px 0 13px;
+    color: inherit;
+}
+
+.notebook-tour-panel > p {
+    font-size: 13px;
+    line-height: 1.8;
+    margin: 0;
+    color: #65735e;
+}
+
+.notebook-tour-progress {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 22px 0 18px;
+    font-size: 11px;
+    color: #708266;
+}
+
+.notebook-tour-progress > div {
+    display: flex;
+    gap: 5px;
+    flex: 1;
+}
+
+.notebook-tour-progress i {
+    height: 4px;
+    flex: 1;
+    border-radius: 3px;
+    background: #d9e0cd;
+}
+
+.notebook-tour-progress i.active {
+    background: #6c8b58;
+}
+
+.notebook-tour-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.notebook-tour-actions > div {
+    display: flex;
+    gap: 8px;
+}
+
+.notebook-tour-actions .button {
+    min-height: 38px;
+    padding: 9px 12px;
+    font-size: 11px;
+    white-space: nowrap;
+}
+
+.notebook-tour-actions .text-button {
+    font-size: 11px;
+    white-space: nowrap;
+}
+
+.notebook-tour .rc-tour-arrow {
+    display: none;
+}
+
+.notebook-tour button:focus-visible {
+    outline: 2px solid #466d50;
+    outline-offset: 3px;
+}
+
+.notebook-tour-trigger:disabled {
+    opacity: 0.55;
+    cursor: default;
+}
+
+html[data-theme="dark"] .notebook-tour-panel {
+    background: #282e38;
+    border-color: #59677e;
+    color: #e7eaf0;
+}
+
+html[data-theme="dark"] .notebook-tour-panel > p,
+html[data-theme="dark"] .notebook-tour-eyebrow,
+html[data-theme="dark"] .notebook-tour-progress {
+    color: #b7c1d0;
+}
+
+html[data-theme="dark"] .notebook-tour-welcome,
+html[data-theme="dark"] .notebook-tour-trigger {
+    background: #303e37;
+    border-color: #627b61;
+    color: #d8e7cd;
+}
+
+html[data-theme="dark"] .notebook-tour-welcome p {
+    color: #c1cfba;
+}
+
+html[data-theme="dark"] .notebook-tour-progress i {
+    background: #465146;
+}
+
+html[data-theme="dark"] .notebook-tour-progress i.active {
+    background: #b6ce9b;
+}
+
+@media (max-width: 760px) {
+    .notebook-tour-trigger {
+        margin-left: auto;
+        min-height: 40px;
+        font-size: 10px;
+    }
+
+    .notebook-tour-welcome {
+        padding: 17px;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    .notebook-tour-welcome > div:first-of-type {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .notebook-tour-welcome h2 {
+        font-size: 25px;
+    }
+
+    .notebook-tour-welcome-actions {
+        width: 100%;
+        justify-content: flex-end;
+        gap: 20px;
+    }
+
+    .notebook-tour.rc-tour {
+        position: fixed !important;
+        left: 12px !important;
+        right: 12px !important;
+        top: auto !important;
+        bottom: max(12px, env(safe-area-inset-bottom)) !important;
+        width: auto !important;
+        transform: none !important;
+    }
+
+    .notebook-tour-panel {
+        width: 100%;
+        max-width: none;
+        max-height: 48dvh;
+        padding: 18px;
+    }
+
+    .notebook-tour-panel h2 {
+        font-size: 28px;
+        margin: 8px 0 10px;
+    }
+
+    .notebook-tour-panel > p {
+        font-size: 12px;
+        line-height: 1.7;
+    }
+
+    .notebook-tour-progress {
+        margin: 15px 0;
+    }
+
+    .notebook-tour-actions .button {
+        min-height: 42px;
+    }
+
+    .notebook-tour-actions .text-button {
+        min-height: 42px;
+    }
+
+    .notebook-tour-eyebrow .icon-button {
+        min-height: 36px;
+        min-width: 36px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .notebook-tour * {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
+@media (max-width: 760px) {
+    .notebook-tour-top.rc-tour {
+        top: max(12px, env(safe-area-inset-top)) !important;
+        bottom: auto !important;
+    }
+}
+
+.notebook-tour-gate {
+    position: fixed;
+    inset: 0;
+    z-index: 1100;
+    display: grid;
+    place-items: center;
+    padding: 12px;
+    background: #1f2c238c;
+}
+
+.notebook-tour-actions > div {
+    margin-left: auto;
+}
+
+.notebook-tour-panel .tour-required-note {
+    margin-top: 14px;
+    font-size: 11px;
+    color: #66765c;
+}
+
+.notebook-tour-panel .tour-save-error {
+    margin-top: 14px;
+    color: #a14d3d;
+    font-size: 12px;
+}
+
+.notebook-tour-gate .button {
+    margin-top: 18px;
+}
+/* Detailed lessons and an isolated, in-memory practice page. */
+.detailed-tour.notebook-tour.rc-tour,
+.detailed-tour.notebook-tour-center.rc-tour {
+    width: 440px;
+    max-width: calc(100vw - 24px);
+}
+
+.detailed-tour .notebook-tour-panel {
+    width: 440px;
+    max-width: calc(100vw - 24px);
+    max-height: calc(100dvh - 40px);
+    overscroll-behavior: contain;
+}
+
+.detailed-tour .notebook-tour-eyebrow {
+    font-size: 8px;
+    letter-spacing: 1.2px;
+}
+
+.detailed-tour .notebook-tour-panel h2 {
+    font-size: 29px;
+}
+
+.notebook-tour-panel .tour-lesson-tip {
+    display: grid;
+    gap: 5px;
+    padding: 12px;
+    margin-top: 16px;
+    border-left: 3px solid #acbb8b;
+    background: #e8edda70;
+    font-size: 11px;
+    line-height: 1.8;
+    color: #62735b;
+}
+
+.tour-lesson-tip > strong {
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.tour-practice {
+    margin-top: 16px;
+    padding: 14px;
+    border: 1px dashed #a8b995;
+    border-radius: 5px;
+    background: #f5f4e6;
+}
+
+.tour-practice-label {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 10px;
+    color: #527047;
+    margin-bottom: 12px;
+}
+
+.tour-practice-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.tour-practice-fields .field {
+    margin: 0;
+    min-width: 0;
+}
+
+.tour-practice-fields .field span {
+    font-size: 10px;
+    line-height: 1.6;
+}
+
+.tour-practice-fields input {
+    width: 100%;
+    min-width: 0;
+    min-height: 38px;
+    padding: 8px;
+    border: 1px solid #ccd5bc;
+    border-radius: 4px;
+    background: #fffef7;
+    color: #354f3a;
+    font-size: 12px;
+}
+
+.tour-practice form > .button {
+    margin-top: 14px;
+    min-height: 38px;
+}
+
+.tour-practice-result {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    color: #466d50;
+}
+
+.tour-practice-result svg {
+    flex-shrink: 0;
+    margin-top: 3px;
+}
+
+.tour-practice-result p {
+    font-size: 12px;
+    line-height: 1.85;
+}
+
+.tour-practice .tour-practice-disclaimer {
+    font-size: 10px;
+    line-height: 1.7;
+    color: #718166;
+    margin: 12px 0 0;
+}
+
+.tour-practice .tour-practice-error {
+    font-size: 11px;
+    line-height: 1.7;
+    color: #a14d3d;
+    margin-top: 10px;
+}
+
+.notebook-tour-panel .tour-next-hint {
+    font-size: 10px;
+    line-height: 1.7;
+    color: #718166;
+    margin-bottom: 10px;
+}
+
+.detailed-tour .notebook-tour-progress {
+    margin: 18px 0 14px;
+}
+
+.notebook-tour-progress progress {
+    flex: 1;
+    min-width: 0;
+    height: 5px;
+    border: 0;
+    accent-color: #6c8b58;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.notebook-tour-progress progress::-webkit-progress-bar {
+    background: #d9e0cd;
+}
+
+.notebook-tour-progress progress::-webkit-progress-value {
+    background: #6c8b58;
+}
+
+.detailed-tour .notebook-tour-actions .button {
+    font-size: 11px;
+    padding: 9px 10px;
+}
+
+html[data-theme="dark"] .tour-practice {
+    background: #303b36;
+    border-color: #748b66;
+}
+
+html[data-theme="dark"] .tour-practice-fields input {
+    background: #252c34;
+    color: #e7eaf0;
+    border-color: #65765e;
+}
+
+html[data-theme="dark"] .tour-practice-label,
+html[data-theme="dark"] .tour-practice-result {
+    color: #d0e0c3;
+}
+
+html[data-theme="dark"] .notebook-tour-panel .tour-lesson-tip {
+    background: #46543b60;
+    color: #c7d5bf;
+}
+
+html[data-theme="dark"] .tour-practice .tour-practice-disclaimer,
+html[data-theme="dark"] .tour-next-hint {
+    color: #b9c9b1;
+}
+
+@media (max-width: 760px) {
+    .detailed-tour.notebook-tour.rc-tour,
+    .detailed-tour.notebook-tour-center.rc-tour {
+        width: auto;
+        max-width: none;
+    }
+
+    .detailed-tour .notebook-tour-panel {
+        width: 100%;
+        max-width: none;
+        max-height: 78dvh;
+    }
+
+    .detailed-tour .notebook-tour-panel h2 {
+        font-size: 27px;
+    }
+
+    .detailed-tour .notebook-tour-eyebrow {
+        letter-spacing: 0.6px;
+    }
+
+    .tour-practice {
+        padding: 12px;
+    }
+
+    .tour-practice-fields {
+        gap: 10px;
+    }
+
+    .tour-practice-fields input {
+        font-size: 16px;
+    }
+
+    .detailed-tour .notebook-tour-actions {
+        gap: 7px;
+    }
+
+    .detailed-tour .notebook-tour-actions > div {
+        gap: 6px;
+    }
+
+    .detailed-tour .notebook-tour-actions .text-button {
+        font-size: 10px;
+    }
+
+    .detailed-tour .notebook-tour-actions .button {
+        font-size: 10px;
+    }
+}
+/* Keep longer lessons inside the viewport as highlighted pages reflow. */
+.detailed-tour.notebook-tour.rc-tour {
+    position: fixed !important;
+    left: auto !important;
+    right: 24px !important;
+    top: 50% !important;
+    bottom: auto !important;
+    transform: translateY(-50%) !important;
+}
+
+.detailed-tour.notebook-tour-center.rc-tour {
+    left: 50% !important;
+    right: auto !important;
+    transform: translate(-50%, -50%) !important;
+}
+
+@media (max-width: 760px) {
+    .detailed-tour.notebook-tour.rc-tour {
+        left: 12px !important;
+        right: 12px !important;
+        top: auto !important;
+        bottom: max(12px, env(safe-area-inset-bottom)) !important;
+        transform: none !important;
+    }
+
+    .detailed-tour.notebook-tour-top.rc-tour {
+        top: max(12px, env(safe-area-inset-top)) !important;
+        bottom: auto !important;
+    }
+}

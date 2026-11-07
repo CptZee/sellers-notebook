@@ -1,0 +1,55 @@
+# Dependencies and package-manager caches
+node_modules/
+.npm-cache/
+
+# Local AI-assistant instructions and tool metadata
+AGENTS.md
+AGENTS.override.md
+CLAUDE.md
+GEMINI.md
+.agents/
+.codex/
+.openai/
+.claude/
+.chatgpt/
+.cursor/
+.github/copilot-instructions.md
+.github/instructions/
+codex-clipboard-*.png
+
+# Next.js, TypeScript and generated exports
+.next/
+.next-dev/
+out/
+dist/
+coverage/
+*.tsbuildinfo
+
+# Private environment values, linked services and one-time installation state
+.env*
+!.env.example
+.dev.vars*
+.neon
+.wrangler/
+.setup/
+*.private.json
+
+# Browser test output and generated verification reports; keep Markdown guides
+playwright-report/
+test-results/
+verification/**/*.png
+verification/**/*.jpg
+verification/**/*.webp
+verification/**/*.json
+verification/**/*.log
+verification/**/*.txt
+promo/audio/*-loudness.txt
+
+# Local logs and operating-system files
+*.log
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Website assets, promotional sources, migrations and dependency lockfiles stay versionable.
+# promo/.gitignore handles its private session, raw footage and generated exports.

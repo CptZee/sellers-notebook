@@ -1,0 +1,33 @@
+# Dependencies, generated builds, caches and local state
+**/node_modules/
+.git/
+.next/
+.next-dev/
+.npm-cache/
+.wrangler/
+.setup/
+.neon
+.openai/
+out/
+dist/
+coverage/
+*.tsbuildinfo
+next-env.d.ts
+
+# Private configuration must never be read or rewritten by formatting tools
+.env*
+.dev.vars*
+
+# Historical migrations and generated schema metadata
+db/migrations/
+
+# Recorded media and machine-generated verification artifacts
+public/
+promo/public/
+promo/dist/
+promo/audio/
+verification/
+
+# Dependency lockfiles and generated Next.js instructions
+**/package-lock.json
+AGENTS.md

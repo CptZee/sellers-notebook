@@ -1,0 +1,1 @@
+ALTER TABLE "seller_marketplace_connections" ADD COLUMN "refresh_locked_until" timestamp with time zone;

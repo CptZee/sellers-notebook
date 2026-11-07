@@ -1,0 +1,2214 @@
+{
+  "id": "18eeaa5f-e311-4591-b44a-4fcb02845138",
+  "prevId": "a217cd1d-6493-47c5-84fd-2c7d00f75950",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.seller_attachments": {
+      "name": "seller_attachments",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "owner_id": {
+          "name": "owner_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "object_key": {
+          "name": "object_key",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "filename": {
+          "name": "filename",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "product_id": {
+          "name": "product_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "content_type": {
+          "name": "content_type",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "size": {
+          "name": "size",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {
+        "seller_attachments_owner_idx": {
+          "name": "seller_attachments_owner_idx",
+          "columns": [
+            {
+              "expression": "owner_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "seller_attachments_product_idx": {
+          "name": "seller_attachments_product_idx",
+          "columns": [
+            {
+              "expression": "owner_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "product_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "seller_attachments_object_key_unique": {
+          "name": "seller_attachments_object_key_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "object_key"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.seller_customer_refunds": {
+      "name": "seller_customer_refunds",
+      "schema": "",
+      "columns": {
+        "owner_id": {
+          "name": "owner_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "sort_order": {
+          "name": "sort_order",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "order_id": {
+          "name": "order_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "amount": {
+          "name": "amount",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "refunded_on": {
+          "name": "refunded_on",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "reason": {
+          "name": "reason",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "seller_customer_refunds_order_idx": {
+          "name": "seller_customer_refunds_order_idx",
+          "columns": [
+            {
+              "expression": "owner_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "order_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "seller_customer_refunds_date_idx": {
+          "name": "seller_customer_refunds_date_idx",
+          "columns": [
+            {
+              "expression": "owner_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "refunded_on",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "seller_customer_refunds_sort_idx": {
+          "name": "seller_customer_refunds_sort_idx",
+          "columns": [
+            {
+              "expression": "owner_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "sort_order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "seller_customer_refunds_owner_id_seller_notebooks_owner_id_fk": {
+          "name": "seller_customer_refunds_owner_id_seller_notebooks_owner_id_fk",
+          "tableFrom": "seller_customer_refunds",
+          "tableTo": "seller_notebooks",
+          "columnsFrom": [
+            "owner_id"
+          ],
+          "columnsTo": [
+            "owner_id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "seller_customer_refunds_owner_id_order_id_seller_orders_owner_id_id_fk": {
+          "name": "seller_customer_refunds_owner_id_order_id_seller_orders_owner_id_id_fk",
+          "tableFrom": "seller_customer_refunds",
+          "tableTo": "seller_orders",
+          "columnsFrom": [
+            "owner_id",
+            "order_id"
+          ],
+          "columnsTo": [
+            "owner_id",
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "seller_customer_refunds_owner_id_id_pk": {
+          "name": "seller_customer_refunds_owner_id_id_pk",
+          "columns": [
+            "owner_id",
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {
+        "seller_customer_refunds_amount_check": {
+          "name": "seller_customer_refunds_amount_check",
+          "value": "\"seller_customer_refunds\".\"amount\">0 and \"seller_customer_refunds\".\"amount\"=round(\"seller_customer_refunds\".\"amount\",2)"
+        }
+      },
+      "isRLSEnabled": false
+    },
+    "public.seller_expenses": {
+      "name": "seller_expenses",
+      "schema": "",
+      "columns": {
+        "owner_id": {
+          "name": "owner_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "sort_order": {
+          "name": "sort_order",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "title": {
+          "name": "title",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "category": {
+          "name": "category",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "amount": {
+          "name": "amount",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "spent_on": {
+          "name": "spent_on",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "channel": {
+          "name": "channel",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "notes": {
+          "name": "notes",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "seller_expenses_owner_date_idx": {
+          "name": "seller_expenses_owner_date_idx",
+          "columns": [
+            {
+              "expression": "owner_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "spent_on",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "seller_expenses_owner_sort_idx": {
+          "name": "seller_expenses_owner_sort_idx",
+          "columns": [
+            {
+              "expression": "owner_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "sort_order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "seller_expenses_owner_id_seller_notebooks_owner_id_fk": {
+          "name": "seller_expenses_owner_id_seller_notebooks_owner_id_fk",
+          "tableFrom": "seller_expenses",
+          "tableTo": "seller_notebooks",
+          "columnsFrom": [
+            "owner_id"
+          ],
+          "columnsTo": [
+            "owner_id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "seller_expenses_owner_id_id_pk": {
+          "name": "seller_expenses_owner_id_id_pk",
+          "columns": [
+            "owner_id",
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {
+        "seller_expenses_amount_check": {
+          "name": "seller_expenses_amount_check",
+          "value": "\"seller_expenses\".\"amount\">0 and \"seller_expenses\".\"amount\"=round(\"seller_expenses\".\"amount\",2)"
+        }
+      },
+      "isRLSEnabled": false
+    },
+    "public.seller_marketplace_auth_states": {
+      "name": "seller_marketplace_auth_states",
+      "schema": "",
+      "columns": {
+        "state_hash": {
+          "name": "state_hash",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "owner_id": {
+          "name": "owner_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "platform": {
+          "name": "platform",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "app_fingerprint": {
+          "name": "app_fingerprint",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "expires_at": {
+          "name": "expires_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "seller_marketplace_state_owner_idx": {
+          "name": "seller_marketplace_state_owner_idx",
+          "columns": [
+            {
+              "expression": "owner_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.seller_marketplace_connections": {
+      "name": "seller_marketplace_connections",
+      "schema": "",
+      "columns": {
+        "owner_id": {
+          "name": "owner_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "platform": {
+          "name": "platform",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "connection_id": {
+          "name": "connection_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "account_id": {
+          "name": "account_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "token_ciphertext": {
+          "name": "token_ciphertext",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "app_fingerprint": {
+          "name": "app_fingerprint",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "expires_at": {
+          "name": "expires_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "refresh_locked_until": {
+          "name": "refresh_locked_until",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "connected_at": {
+          "name": "connected_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {
+        "seller_marketplace_connections_owner_id_platform_pk": {
+          "name": "seller_marketplace_connections_owner_id_platform_pk",
+          "columns": [
+            "owner_id",
+            "platform"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.seller_notebooks": {
+      "name": "seller_notebooks",
+      "schema": "",
+      "columns": {
+        "owner_id": {
+          "name": "owner_id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "display_name": {
+          "name": "display_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "sidebar_note": {
+          "name": "sidebar_note",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "''"
+        },
+        "business_name": {
+          "name": "business_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "notebook_title": {
+          "name": "notebook_title",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tagline": {
+          "name": "tagline",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "icon": {
+          "name": "icon",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "revision": {
+          "name": "revision",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 1
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.seller_orders": {
+      "name": "seller_orders",
+      "schema": "",
+      "columns": {
+        "owner_id": {
+          "name": "owner_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "sort_order": {
+          "name": "sort_order",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "product_id": {
+          "name": "product_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "product_name": {
+          "name": "product_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "customer": {
+          "name": "customer",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "channel": {
+          "name": "channel",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "quantity": {
+          "name": "quantity",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "price": {
+          "name": "price",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "cost": {
+          "name": "cost",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "fee": {
+          "name": "fee",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "packaging": {
+          "name": "packaging",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "shipping": {
+          "name": "shipping",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "ordered_on": {
+          "name": "ordered_on",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "status": {
+          "name": "status",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "source_order_id": {
+          "name": "source_order_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "source_order_key": {
+          "name": "source_order_key",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "generated": {
+            "as": "upper(btrim(source_order_id))",
+            "type": "stored"
+          }
+        },
+        "stock_applied": {
+          "name": "stock_applied",
+          "type": "boolean",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "seller_orders_owner_date_idx": {
+          "name": "seller_orders_owner_date_idx",
+          "columns": [
+            {
+              "expression": "owner_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "ordered_on",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "seller_orders_owner_status_date_idx": {
+          "name": "seller_orders_owner_status_date_idx",
+          "columns": [
+            {
+              "expression": "owner_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "status",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "ordered_on",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "seller_orders_owner_source_idx": {
+          "name": "seller_orders_owner_source_idx",
+          "columns": [
+            {
+              "expression": "owner_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "channel",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "source_order_key",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "seller_orders_owner_sort_idx": {
+          "name": "seller_orders_owner_sort_idx",
+          "columns": [
+            {
+              "expression": "owner_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "sort_order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "seller_orders_owner_id_seller_notebooks_owner_id_fk": {
+          "name": "seller_orders_owner_id_seller_notebooks_owner_id_fk",
+          "tableFrom": "seller_orders",
+          "tableTo": "seller_notebooks",
+          "columnsFrom": [
+            "owner_id"
+          ],
+          "columnsTo": [
+            "owner_id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "seller_orders_owner_id_product_id_seller_products_owner_id_id_fk": {
+          "name": "seller_orders_owner_id_product_id_seller_products_owner_id_id_fk",
+          "tableFrom": "seller_orders",
+          "tableTo": "seller_products",
+          "columnsFrom": [
+            "owner_id",
+            "product_id"
+          ],
+          "columnsTo": [
+            "owner_id",
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "seller_orders_owner_id_id_pk": {
+          "name": "seller_orders_owner_id_id_pk",
+          "columns": [
+            "owner_id",
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {
+        "seller_orders_status_check": {
+          "name": "seller_orders_status_check",
+          "value": "\"seller_orders\".\"status\" in ('Processing','Completed','Cancelled')"
+        },
+        "seller_orders_quantity_check": {
+          "name": "seller_orders_quantity_check",
+          "value": "\"seller_orders\".\"quantity\" between 1 and 10000000"
+        },
+        "seller_orders_money_check": {
+          "name": "seller_orders_money_check",
+          "value": "\"seller_orders\".\"price\">=0 and \"seller_orders\".\"cost\">=0 and \"seller_orders\".\"packaging\">=0 and \"seller_orders\".\"shipping\">=0 and \"seller_orders\".\"fee\">=0 and \"seller_orders\".\"fee\"<100"
+        }
+      },
+      "isRLSEnabled": false
+    },
+    "public.seller_products": {
+      "name": "seller_products",
+      "schema": "",
+      "columns": {
+        "owner_id": {
+          "name": "owner_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "sort_order": {
+          "name": "sort_order",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "sku": {
+          "name": "sku",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "sku_key": {
+          "name": "sku_key",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "generated": {
+            "as": "lower(sku)",
+            "type": "stored"
+          }
+        },
+        "category": {
+          "name": "category",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "cost": {
+          "name": "cost",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "price": {
+          "name": "price",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "stock": {
+          "name": "stock",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "color": {
+          "name": "color",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "symbol": {
+          "name": "symbol",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "reorder_point": {
+          "name": "reorder_point",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "target_stock": {
+          "name": "target_stock",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "seller_products_owner_sort_idx": {
+          "name": "seller_products_owner_sort_idx",
+          "columns": [
+            {
+              "expression": "owner_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "sort_order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "seller_products_owner_id_seller_notebooks_owner_id_fk": {
+          "name": "seller_products_owner_id_seller_notebooks_owner_id_fk",
+          "tableFrom": "seller_products",
+          "tableTo": "seller_notebooks",
+          "columnsFrom": [
+            "owner_id"
+          ],
+          "columnsTo": [
+            "owner_id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "seller_products_owner_id_id_pk": {
+          "name": "seller_products_owner_id_id_pk",
+          "columns": [
+            "owner_id",
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {
+        "seller_products_owner_sku_unique": {
+          "name": "seller_products_owner_sku_unique",
+          "nullsNotDistinct": false,
+          "columns": [
+            "owner_id",
+            "sku_key"
+          ]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {
+        "seller_products_stock_check": {
+          "name": "seller_products_stock_check",
+          "value": "\"seller_products\".\"stock\" between 0 and 10000000"
+        },
+        "seller_products_money_check": {
+          "name": "seller_products_money_check",
+          "value": "\"seller_products\".\"cost\">=0 and \"seller_products\".\"price\">=0"
+        }
+      },
+      "isRLSEnabled": false
+    },
+    "public.seller_purchase_items": {
+      "name": "seller_purchase_items",
+      "schema": "",
+      "columns": {
+        "owner_id": {
+          "name": "owner_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "purchase_id": {
+          "name": "purchase_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "product_id": {
+          "name": "product_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "position": {
+          "name": "position",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "product_name": {
+          "name": "product_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "sku": {
+          "name": "sku",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "quantity": {
+          "name": "quantity",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "unit_cost": {
+          "name": "unit_cost",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "received_quantity": {
+          "name": "received_quantity",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "seller_purchase_items_product_idx": {
+          "name": "seller_purchase_items_product_idx",
+          "columns": [
+            {
+              "expression": "owner_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "product_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "seller_purchase_items_owner_id_seller_notebooks_owner_id_fk": {
+          "name": "seller_purchase_items_owner_id_seller_notebooks_owner_id_fk",
+          "tableFrom": "seller_purchase_items",
+          "tableTo": "seller_notebooks",
+          "columnsFrom": [
+            "owner_id"
+          ],
+          "columnsTo": [
+            "owner_id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "seller_purchase_items_owner_id_purchase_id_seller_purchase_orders_owner_id_id_fk": {
+          "name": "seller_purchase_items_owner_id_purchase_id_seller_purchase_orders_owner_id_id_fk",
+          "tableFrom": "seller_purchase_items",
+          "tableTo": "seller_purchase_orders",
+          "columnsFrom": [
+            "owner_id",
+            "purchase_id"
+          ],
+          "columnsTo": [
+            "owner_id",
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "seller_purchase_items_owner_id_product_id_seller_products_owner_id_id_fk": {
+          "name": "seller_purchase_items_owner_id_product_id_seller_products_owner_id_id_fk",
+          "tableFrom": "seller_purchase_items",
+          "tableTo": "seller_products",
+          "columnsFrom": [
+            "owner_id",
+            "product_id"
+          ],
+          "columnsTo": [
+            "owner_id",
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "seller_purchase_items_owner_id_purchase_id_product_id_pk": {
+          "name": "seller_purchase_items_owner_id_purchase_id_product_id_pk",
+          "columns": [
+            "owner_id",
+            "purchase_id",
+            "product_id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {
+        "seller_purchase_items_quantity_check": {
+          "name": "seller_purchase_items_quantity_check",
+          "value": "\"seller_purchase_items\".\"quantity\" between 1 and 10000000 and (\"seller_purchase_items\".\"received_quantity\" is null or \"seller_purchase_items\".\"received_quantity\" between 0 and \"seller_purchase_items\".\"quantity\") and \"seller_purchase_items\".\"unit_cost\">=0"
+        }
+      },
+      "isRLSEnabled": false
+    },
+    "public.seller_purchase_orders": {
+      "name": "seller_purchase_orders",
+      "schema": "",
+      "columns": {
+        "owner_id": {
+          "name": "owner_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "sort_order": {
+          "name": "sort_order",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "reference": {
+          "name": "reference",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "supplier_id": {
+          "name": "supplier_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "supplier_snapshot_id": {
+          "name": "supplier_snapshot_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "supplier_name": {
+          "name": "supplier_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "expected_on": {
+          "name": "expected_on",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "notes": {
+          "name": "notes",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "status": {
+          "name": "status",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "received_at": {
+          "name": "received_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "cancelled_at": {
+          "name": "cancelled_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "seller_purchases_owner_supplier_idx": {
+          "name": "seller_purchases_owner_supplier_idx",
+          "columns": [
+            {
+              "expression": "owner_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "supplier_snapshot_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "seller_purchases_owner_status_date_idx": {
+          "name": "seller_purchases_owner_status_date_idx",
+          "columns": [
+            {
+              "expression": "owner_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "status",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "expected_on",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "seller_purchases_owner_sort_idx": {
+          "name": "seller_purchases_owner_sort_idx",
+          "columns": [
+            {
+              "expression": "owner_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "sort_order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "seller_purchase_orders_owner_id_seller_notebooks_owner_id_fk": {
+          "name": "seller_purchase_orders_owner_id_seller_notebooks_owner_id_fk",
+          "tableFrom": "seller_purchase_orders",
+          "tableTo": "seller_notebooks",
+          "columnsFrom": [
+            "owner_id"
+          ],
+          "columnsTo": [
+            "owner_id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "seller_purchases_supplier_fk": {
+          "name": "seller_purchases_supplier_fk",
+          "tableFrom": "seller_purchase_orders",
+          "tableTo": "seller_suppliers",
+          "columnsFrom": [
+            "owner_id",
+            "supplier_id"
+          ],
+          "columnsTo": [
+            "owner_id",
+            "id"
+          ],
+          "onDelete": "set null",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "seller_purchase_orders_owner_id_id_pk": {
+          "name": "seller_purchase_orders_owner_id_id_pk",
+          "columns": [
+            "owner_id",
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {
+        "seller_purchases_status_check": {
+          "name": "seller_purchases_status_check",
+          "value": "\"seller_purchase_orders\".\"status\" in ('Ordered','Partially received','Received','Cancelled')"
+        }
+      },
+      "isRLSEnabled": false
+    },
+    "public.seller_purchase_payments": {
+      "name": "seller_purchase_payments",
+      "schema": "",
+      "columns": {
+        "owner_id": {
+          "name": "owner_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "purchase_id": {
+          "name": "purchase_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "position": {
+          "name": "position",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "amount": {
+          "name": "amount",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "recorded_on": {
+          "name": "recorded_on",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "method": {
+          "name": "method",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "reference": {
+          "name": "reference",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "notes": {
+          "name": "notes",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "seller_purchase_payments_owner_id_seller_notebooks_owner_id_fk": {
+          "name": "seller_purchase_payments_owner_id_seller_notebooks_owner_id_fk",
+          "tableFrom": "seller_purchase_payments",
+          "tableTo": "seller_notebooks",
+          "columnsFrom": [
+            "owner_id"
+          ],
+          "columnsTo": [
+            "owner_id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "seller_purchase_payments_owner_id_purchase_id_seller_purchase_orders_owner_id_id_fk": {
+          "name": "seller_purchase_payments_owner_id_purchase_id_seller_purchase_orders_owner_id_id_fk",
+          "tableFrom": "seller_purchase_payments",
+          "tableTo": "seller_purchase_orders",
+          "columnsFrom": [
+            "owner_id",
+            "purchase_id"
+          ],
+          "columnsTo": [
+            "owner_id",
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "seller_purchase_payments_owner_id_purchase_id_id_pk": {
+          "name": "seller_purchase_payments_owner_id_purchase_id_id_pk",
+          "columns": [
+            "owner_id",
+            "purchase_id",
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {
+        "seller_purchase_payments_amount_check": {
+          "name": "seller_purchase_payments_amount_check",
+          "value": "\"seller_purchase_payments\".\"amount\">0 and \"seller_purchase_payments\".\"amount\"=round(\"seller_purchase_payments\".\"amount\",2)"
+        }
+      },
+      "isRLSEnabled": false
+    },
+    "public.seller_shopee_auth_states": {
+      "name": "seller_shopee_auth_states",
+      "schema": "",
+      "columns": {
+        "state_hash": {
+          "name": "state_hash",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "owner_id": {
+          "name": "owner_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "expires_at": {
+          "name": "expires_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "seller_shopee_state_owner_idx": {
+          "name": "seller_shopee_state_owner_idx",
+          "columns": [
+            {
+              "expression": "owner_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.seller_shopee_connections": {
+      "name": "seller_shopee_connections",
+      "schema": "",
+      "columns": {
+        "owner_id": {
+          "name": "owner_id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "connection_id": {
+          "name": "connection_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "shop_id": {
+          "name": "shop_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "environment": {
+          "name": "environment",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "token_ciphertext": {
+          "name": "token_ciphertext",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "expires_at": {
+          "name": "expires_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "refresh_locked_until": {
+          "name": "refresh_locked_until",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "last_fetched_at": {
+          "name": "last_fetched_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "connected_at": {
+          "name": "connected_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.seller_stock_adjustments": {
+      "name": "seller_stock_adjustments",
+      "schema": "",
+      "columns": {
+        "owner_id": {
+          "name": "owner_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "sort_order": {
+          "name": "sort_order",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "product_id": {
+          "name": "product_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "product_name": {
+          "name": "product_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "sku": {
+          "name": "sku",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "kind": {
+          "name": "kind",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "before": {
+          "name": "before",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "after": {
+          "name": "after",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "reason": {
+          "name": "reason",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "purchase_id": {
+          "name": "purchase_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        }
+      },
+      "indexes": {
+        "seller_stock_adjustments_product_idx": {
+          "name": "seller_stock_adjustments_product_idx",
+          "columns": [
+            {
+              "expression": "owner_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "product_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "seller_stock_adjustments_purchase_idx": {
+          "name": "seller_stock_adjustments_purchase_idx",
+          "columns": [
+            {
+              "expression": "owner_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "purchase_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "seller_stock_adjustments_sort_idx": {
+          "name": "seller_stock_adjustments_sort_idx",
+          "columns": [
+            {
+              "expression": "owner_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "sort_order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "seller_stock_adjustments_owner_id_seller_notebooks_owner_id_fk": {
+          "name": "seller_stock_adjustments_owner_id_seller_notebooks_owner_id_fk",
+          "tableFrom": "seller_stock_adjustments",
+          "tableTo": "seller_notebooks",
+          "columnsFrom": [
+            "owner_id"
+          ],
+          "columnsTo": [
+            "owner_id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "seller_stock_adjustments_owner_id_product_id_seller_products_owner_id_id_fk": {
+          "name": "seller_stock_adjustments_owner_id_product_id_seller_products_owner_id_id_fk",
+          "tableFrom": "seller_stock_adjustments",
+          "tableTo": "seller_products",
+          "columnsFrom": [
+            "owner_id",
+            "product_id"
+          ],
+          "columnsTo": [
+            "owner_id",
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "seller_stock_adjustments_owner_id_purchase_id_seller_purchase_orders_owner_id_id_fk": {
+          "name": "seller_stock_adjustments_owner_id_purchase_id_seller_purchase_orders_owner_id_id_fk",
+          "tableFrom": "seller_stock_adjustments",
+          "tableTo": "seller_purchase_orders",
+          "columnsFrom": [
+            "owner_id",
+            "purchase_id"
+          ],
+          "columnsTo": [
+            "owner_id",
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "seller_stock_adjustments_owner_id_id_pk": {
+          "name": "seller_stock_adjustments_owner_id_id_pk",
+          "columns": [
+            "owner_id",
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {
+        "seller_stock_adjustments_quantity_check": {
+          "name": "seller_stock_adjustments_quantity_check",
+          "value": "\"seller_stock_adjustments\".\"before\" between 0 and 10000000 and \"seller_stock_adjustments\".\"after\" between 0 and 10000000 and \"seller_stock_adjustments\".\"before\"<>\"seller_stock_adjustments\".\"after\""
+        },
+        "seller_stock_adjustments_kind_check": {
+          "name": "seller_stock_adjustments_kind_check",
+          "value": "\"seller_stock_adjustments\".\"kind\" in ('Restock','Damage','Correction')"
+        }
+      },
+      "isRLSEnabled": false
+    },
+    "public.seller_supplier_products": {
+      "name": "seller_supplier_products",
+      "schema": "",
+      "columns": {
+        "owner_id": {
+          "name": "owner_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "supplier_id": {
+          "name": "supplier_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "product_id": {
+          "name": "product_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "position": {
+          "name": "position",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "seller_supplier_products_product_idx": {
+          "name": "seller_supplier_products_product_idx",
+          "columns": [
+            {
+              "expression": "owner_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "product_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "seller_supplier_products_owner_id_seller_notebooks_owner_id_fk": {
+          "name": "seller_supplier_products_owner_id_seller_notebooks_owner_id_fk",
+          "tableFrom": "seller_supplier_products",
+          "tableTo": "seller_notebooks",
+          "columnsFrom": [
+            "owner_id"
+          ],
+          "columnsTo": [
+            "owner_id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "seller_supplier_products_owner_id_supplier_id_seller_suppliers_owner_id_id_fk": {
+          "name": "seller_supplier_products_owner_id_supplier_id_seller_suppliers_owner_id_id_fk",
+          "tableFrom": "seller_supplier_products",
+          "tableTo": "seller_suppliers",
+          "columnsFrom": [
+            "owner_id",
+            "supplier_id"
+          ],
+          "columnsTo": [
+            "owner_id",
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "seller_supplier_products_owner_id_product_id_seller_products_owner_id_id_fk": {
+          "name": "seller_supplier_products_owner_id_product_id_seller_products_owner_id_id_fk",
+          "tableFrom": "seller_supplier_products",
+          "tableTo": "seller_products",
+          "columnsFrom": [
+            "owner_id",
+            "product_id"
+          ],
+          "columnsTo": [
+            "owner_id",
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "seller_supplier_products_owner_id_supplier_id_product_id_pk": {
+          "name": "seller_supplier_products_owner_id_supplier_id_product_id_pk",
+          "columns": [
+            "owner_id",
+            "supplier_id",
+            "product_id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.seller_supplier_refunds": {
+      "name": "seller_supplier_refunds",
+      "schema": "",
+      "columns": {
+        "owner_id": {
+          "name": "owner_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "purchase_id": {
+          "name": "purchase_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "position": {
+          "name": "position",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "amount": {
+          "name": "amount",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "recorded_on": {
+          "name": "recorded_on",
+          "type": "date",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "method": {
+          "name": "method",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "reference": {
+          "name": "reference",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "notes": {
+          "name": "notes",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "seller_supplier_refunds_owner_id_seller_notebooks_owner_id_fk": {
+          "name": "seller_supplier_refunds_owner_id_seller_notebooks_owner_id_fk",
+          "tableFrom": "seller_supplier_refunds",
+          "tableTo": "seller_notebooks",
+          "columnsFrom": [
+            "owner_id"
+          ],
+          "columnsTo": [
+            "owner_id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "seller_supplier_refunds_owner_id_purchase_id_seller_purchase_orders_owner_id_id_fk": {
+          "name": "seller_supplier_refunds_owner_id_purchase_id_seller_purchase_orders_owner_id_id_fk",
+          "tableFrom": "seller_supplier_refunds",
+          "tableTo": "seller_purchase_orders",
+          "columnsFrom": [
+            "owner_id",
+            "purchase_id"
+          ],
+          "columnsTo": [
+            "owner_id",
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "seller_supplier_refunds_owner_id_purchase_id_id_pk": {
+          "name": "seller_supplier_refunds_owner_id_purchase_id_id_pk",
+          "columns": [
+            "owner_id",
+            "purchase_id",
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {
+        "seller_supplier_refunds_amount_check": {
+          "name": "seller_supplier_refunds_amount_check",
+          "value": "\"seller_supplier_refunds\".\"amount\">0 and \"seller_supplier_refunds\".\"amount\"=round(\"seller_supplier_refunds\".\"amount\",2)"
+        }
+      },
+      "isRLSEnabled": false
+    },
+    "public.seller_suppliers": {
+      "name": "seller_suppliers",
+      "schema": "",
+      "columns": {
+        "owner_id": {
+          "name": "owner_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "sort_order": {
+          "name": "sort_order",
+          "type": "numeric",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "contact": {
+          "name": "contact",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "email": {
+          "name": "email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "phone": {
+          "name": "phone",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "address": {
+          "name": "address",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "notes": {
+          "name": "notes",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "lead_time_days": {
+          "name": "lead_time_days",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {
+        "seller_suppliers_owner_name_idx": {
+          "name": "seller_suppliers_owner_name_idx",
+          "columns": [
+            {
+              "expression": "owner_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "name",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        },
+        "seller_suppliers_owner_sort_idx": {
+          "name": "seller_suppliers_owner_sort_idx",
+          "columns": [
+            {
+              "expression": "owner_id",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            },
+            {
+              "expression": "sort_order",
+              "isExpression": false,
+              "asc": true,
+              "nulls": "last"
+            }
+          ],
+          "isUnique": false,
+          "concurrently": false,
+          "method": "btree",
+          "with": {}
+        }
+      },
+      "foreignKeys": {
+        "seller_suppliers_owner_id_seller_notebooks_owner_id_fk": {
+          "name": "seller_suppliers_owner_id_seller_notebooks_owner_id_fk",
+          "tableFrom": "seller_suppliers",
+          "tableTo": "seller_notebooks",
+          "columnsFrom": [
+            "owner_id"
+          ],
+          "columnsTo": [
+            "owner_id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "seller_suppliers_owner_id_id_pk": {
+          "name": "seller_suppliers_owner_id_id_pk",
+          "columns": [
+            "owner_id",
+            "id"
+          ]
+        }
+      },
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {
+        "seller_suppliers_lead_time_check": {
+          "name": "seller_suppliers_lead_time_check",
+          "value": "\"seller_suppliers\".\"lead_time_days\" between 0 and 3650"
+        }
+      },
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {},
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}

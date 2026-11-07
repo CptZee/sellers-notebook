@@ -1,0 +1,648 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width,initial-scale=1"
+        />
+        <meta
+            name="robots"
+            content="noindex,nofollow"
+        />
+        <title>First launch · Seller’s Notebook</title>
+        <style nonce="__NONCE__">
+            :root {
+                color-scheme: light;
+                --ink: #364a3f;
+                --green: #466d50;
+                --line: #d8ddcb;
+            }
+            * {
+                box-sizing: border-box;
+            }
+            body {
+                margin: 0;
+                background: #e9e5d7;
+                color: var(--ink);
+                font:
+                    14px/1.65 "Segoe UI",
+                    Arial,
+                    sans-serif;
+            }
+            main {
+                max-width: 1080px;
+                margin: auto;
+                padding: 38px 24px;
+            }
+            header {
+                max-width: 770px;
+                margin-bottom: 26px;
+            }
+            .eyebrow {
+                font-size: 10px;
+                letter-spacing: 2px;
+                color: #6c8064;
+            }
+            h1,
+            h2 {
+                font-family: "Segoe Print", "Bradley Hand", cursive;
+                font-weight: 500;
+                line-height: 1.4;
+            }
+            h1 {
+                font-size: 36px;
+                margin: 12px 0;
+            }
+            h2 {
+                font-size: 24px;
+                margin: 0 0 6px;
+            }
+            p {
+                margin: 8px 0;
+            }
+            .intro {
+                font-size: 14px;
+                color: #61715d;
+            }
+            .layout {
+                display: grid;
+                grid-template-columns: 220px minmax(0, 1fr);
+                gap: 24px;
+            }
+            .steps {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                align-self: start;
+                position: sticky;
+                top: 20px;
+            }
+            .steps button {
+                border: 1px solid var(--line);
+                background: #f3efdc;
+                border-radius: 4px;
+                text-align: left;
+                padding: 13px 14px;
+                color: var(--ink);
+                font: inherit;
+                cursor: pointer;
+            }
+            .steps button[aria-current="step"] {
+                background: #dce4cf;
+                border-color: #a5b78f;
+                font-weight: 600;
+            }
+            .steps button span {
+                margin-right: 10px;
+                font-size: 12px;
+            }
+            .paper {
+                background: #fcfaef;
+                padding: 28px;
+                border: 1px solid var(--line);
+                border-radius: 5px 12px 5px 5px;
+                box-shadow: 4px 5px 0 #6d7c5110;
+            }
+            .explanation {
+                color: #6e7c67;
+                font-size: 13px;
+                margin-bottom: 22px;
+            }
+            .fields {
+                display: grid;
+                gap: 22px;
+            }
+            .field label {
+                display: block;
+                font-weight: 600;
+                font-size: 13px;
+                margin-bottom: 7px;
+            }
+            .field input,
+            .field select {
+                width: 100%;
+                padding: 11px;
+                border: 1px solid #c7d0bc;
+                border-radius: 4px;
+                background: #f9f8f0;
+                color: var(--ink);
+                font: inherit;
+            }
+            .field input:focus,
+            .field select:focus,
+            button:focus-visible,
+            a:focus-visible {
+                outline: 3px solid #a4bd90;
+                outline-offset: 2px;
+            }
+            .field input[aria-invalid="true"] {
+                border-color: #a04a3f;
+            }
+            .field small {
+                display: block;
+                font-size: 11px;
+                color: #74816a;
+                margin-top: 5px;
+                overflow-wrap: anywhere;
+            }
+            .field .error {
+                color: #a04a3f;
+            }
+            .field .key {
+                font-family: monospace;
+                font-size: 10px;
+                color: #869079;
+            }
+            .entry {
+                display: flex;
+                gap: 8px;
+                align-items: center;
+            }
+            .entry input {
+                min-width: 0;
+            }
+            .generate {
+                padding: 10px 12px;
+                flex-shrink: 0;
+                background: #e4e9d8;
+                border: 1px solid var(--line);
+                color: var(--ink);
+                border-radius: 4px;
+                font: inherit;
+                cursor: pointer;
+                font-size: 12px;
+            }
+            .actions {
+                display: flex;
+                justify-content: space-between;
+                gap: 12px;
+                border-top: 1px dashed var(--line);
+                margin-top: 28px;
+                padding-top: 20px;
+            }
+            .button {
+                border: 1px solid #c1ccb3;
+                background: #eef0e1;
+                padding: 11px 18px;
+                border-radius: 4px;
+                color: var(--ink);
+                font: inherit;
+                cursor: pointer;
+            }
+            .primary {
+                background: var(--green);
+                color: white;
+                border-color: var(--green);
+            }
+            button:disabled {
+                opacity: 0.5;
+                cursor: not-allowed;
+            }
+            .notice {
+                background: #eeeccf;
+                padding: 14px 18px;
+                border: 1px solid #dedbb9;
+                border-radius: 5px;
+                margin-bottom: 24px;
+                font-size: 12px;
+            }
+            .alert {
+                background: #fae8df;
+                color: #833b32;
+                padding: 14px;
+                border-radius: 4px;
+                margin: 18px 0;
+            }
+            .review {
+                padding: 12px 0;
+                border-bottom: 1px solid var(--line);
+                display: flex;
+                justify-content: space-between;
+                gap: 12px;
+            }
+            .review small {
+                color: #78836f;
+            }
+            .acknowledge {
+                display: flex;
+                gap: 10px;
+                margin-top: 24px;
+                align-items: start;
+                font-size: 13px;
+            }
+            .acknowledge input {
+                margin-top: 6px;
+            }
+            .completion {
+                max-width: 720px;
+                margin: 60px auto;
+            }
+            code {
+                font-size: 12px;
+                overflow-wrap: anywhere;
+            }
+            footer {
+                font-size: 12px;
+                text-align: center;
+                color: #738068;
+                margin: 32px 0;
+            }
+            a {
+                color: inherit;
+            }
+            #status:empty {
+                display: none;
+            }
+            #loading {
+                padding: 40px;
+                text-align: center;
+            }
+            [hidden] {
+                display: none !important;
+            }
+            @media (max-width: 680px) {
+                main {
+                    padding: 24px 16px;
+                }
+                .layout {
+                    grid-template-columns: 1fr;
+                }
+                .steps {
+                    position: static;
+                    display: grid;
+                    grid-template-columns: repeat(2, minmax(0, 1fr));
+                    gap: 6px;
+                }
+                .steps button {
+                    padding: 9px;
+                    font-size: 12px;
+                }
+                .paper {
+                    padding: 20px;
+                }
+                h1 {
+                    font-size: 29px;
+                }
+                .entry {
+                    flex-wrap: wrap;
+                }
+                .entry input {
+                    flex: 1 1 200px;
+                }
+                .review {
+                    flex-direction: column;
+                    gap: 3px;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <main>
+            <header>
+                <span class="eyebrow">A FIRST PAGE, JUST FOR YOU</span>
+                <h1>Let’s set up your notebook.</h1>
+                <p class="intro">
+                    One private setup for the person installing Seller’s Notebook. Connect your
+                    services now, then close this page for good.
+                </p>
+            </header>
+            <div class="notice">
+                This installer runs only on this machine. Existing settings are kept when a field is
+                left blank. Optional services can stay empty. Nothing creates a cloud account, key,
+                or payment for you.
+            </div>
+            <div
+                id="status"
+                role="alert"
+                tabindex="-1"
+            ></div>
+            <div
+                id="loading"
+                role="status"
+            >
+                Checking your installation…
+            </div>
+            <div
+                class="layout"
+                id="wizard"
+                hidden
+            >
+                <nav
+                    class="steps"
+                    aria-label="Setup steps"
+                    id="steps"
+                ></nav>
+                <section
+                    class="paper"
+                    aria-live="polite"
+                >
+                    <h2
+                        id="title"
+                        tabindex="-1"
+                    ></h2>
+                    <p
+                        class="explanation"
+                        id="description"
+                    ></p>
+                    <form
+                        id="form"
+                        autocomplete="off"
+                    >
+                        <div
+                            class="fields"
+                            id="fields"
+                        ></div>
+                        <div
+                            id="review"
+                            hidden
+                        ></div>
+                        <div class="actions">
+                            <button
+                                type="button"
+                                class="button"
+                                id="back"
+                            >
+                                Back</button
+                            ><button
+                                type="submit"
+                                class="button primary"
+                                id="next"
+                            >
+                                Next
+                            </button>
+                        </div>
+                    </form>
+                </section>
+            </div>
+            <footer>Seller’s Notebook · Made by Aaron James R. Misison</footer>
+        </main>
+        <script nonce="__NONCE__">
+            (() => {
+                "use strict";
+                let token = location.hash.slice(1);
+                history.replaceState(null, "", location.pathname);
+                const endpoint = location.pathname + "/configuration",
+                    values = {},
+                    generated = new Set();
+                let groups = [],
+                    fields = [],
+                    step = 0,
+                    errors = {},
+                    saving = false;
+                const $ = (id) => document.getElementById(id),
+                    element = (tag, text, className) => {
+                        const el = document.createElement(tag);
+                        if (text !== undefined) el.textContent = text;
+                        if (className) el.className = className;
+                        return el;
+                    };
+                async function api(method, body) {
+                    const response = await fetch(endpoint, {
+                        method,
+                        cache: "no-store",
+                        headers: {
+                            Authorization: "Bearer " + token,
+                            ...(method === "POST" ? { "Content-Type": "application/json" } : {}),
+                        },
+                        ...(body ? { body: JSON.stringify(body) } : {}),
+                    });
+                    let data;
+                    try {
+                        data = await response.json();
+                    } catch {
+                        throw Error(
+                            "This setup link is unavailable. Use the private link from the installation terminal.",
+                        );
+                    }
+                    if (!response.ok) {
+                        const error = Error(data.error || "Setup is unavailable.");
+                        error.fields = data.fields;
+                        throw error;
+                    }
+                    return data;
+                }
+                function alert(message) {
+                    $("status").textContent = message;
+                    if (message) $("status").focus();
+                }
+                function show(focus = false) {
+                    $("steps").replaceChildren();
+                    [...groups, ["review", "Review & finish"]].forEach((g, index) => {
+                        const button = element("button");
+                        button.type = "button";
+                        button.append(
+                            element("span", String(index + 1).padStart(2, "0")),
+                            document.createTextNode(g[1]),
+                        );
+                        if (index === step) button.setAttribute("aria-current", "step");
+                        button.disabled = saving;
+                        button.addEventListener("click", () => {
+                            step = index;
+                            show(true);
+                        });
+                        $("steps").append(button);
+                    });
+                    const review = step === groups.length;
+                    $("title").textContent = review ? "One last look." : groups[step][1];
+                    $("description").textContent = review
+                        ? "Only configuration status is shown here. Your credentials will be saved privately in .env, and this installer will be locked."
+                        : groups[step][2];
+                    $("fields").replaceChildren();
+                    $("review").replaceChildren();
+                    $("review").hidden = !review;
+                    $("back").disabled = step === 0 || saving;
+                    $("next").textContent = saving
+                        ? "Saving…"
+                        : review
+                          ? "Save & close setup"
+                          : "Next";
+                    $("next").disabled = saving;
+                    if (review) {
+                        for (const group of groups) {
+                            const members = fields.filter((f) => f.group === group[0]),
+                                count = members.filter(
+                                    (f) => f.configured || values[f.key] || generated.has(f.key),
+                                ).length,
+                                row = element("div", undefined, "review");
+                            row.append(
+                                element("strong", group[1]),
+                                element(
+                                    "small",
+                                    count + " of " + members.length + " settings provided",
+                                ),
+                            );
+                            $("review").append(row);
+                        }
+                        const note = element(
+                            "p",
+                            "This saves settings; it does not verify provider credentials or run database migrations. Optional feature switches should stay off until their acceptance checks pass.",
+                        );
+                        $("review").append(note);
+                        const label = element("label", undefined, "acknowledge"),
+                            check = element("input");
+                        check.type = "checkbox";
+                        check.id = "acknowledged";
+                        label.append(
+                            check,
+                            element(
+                                "span",
+                                "I have reviewed the settings. I understand this setup will close permanently, and I will keep .env and .setup private on persistent storage.",
+                            ),
+                        );
+                        $("review").append(label);
+                    } else
+                        for (const f of fields.filter((f) => f.group === groups[step][0])) {
+                            const row = element("div", undefined, "field"),
+                                label = element("label", f.label + (f.required ? " *" : ""));
+                            label.htmlFor = f.key;
+                            row.append(label);
+                            let input;
+                            if (f.options) {
+                                input = element("select");
+                                const keep = element(
+                                    "option",
+                                    f.configured ? "Keep existing setting" : "Choose…",
+                                );
+                                keep.value = "";
+                                input.append(keep);
+                                for (const value of f.options) {
+                                    const option = element(
+                                        "option",
+                                        value === "true" ? "On" : value === "false" ? "Off" : value,
+                                    );
+                                    option.value = value;
+                                    input.append(option);
+                                }
+                                if (!f.configured && values[f.key] === undefined)
+                                    values[f.key] = f.defaultValue || "";
+                            } else {
+                                input = element("input");
+                                input.type = f.secret ? "password" : "text";
+                                input.spellcheck = false;
+                                input.autocomplete = "off";
+                                input.placeholder = f.configured
+                                    ? "Already configured — leave blank to keep"
+                                    : generated.has(f.key)
+                                      ? "Generated privately when you finish"
+                                      : f.defaultValue || "Enter a value";
+                            }
+                            input.id = f.key;
+                            input.name = f.key;
+                            input.value = values[f.key] || "";
+                            input.disabled = f.external || generated.has(f.key) || saving;
+                            input.setAttribute("aria-describedby", f.key + "-help");
+                            if (errors[f.key]) input.setAttribute("aria-invalid", "true");
+                            input.addEventListener("input", () => {
+                                values[f.key] = input.value;
+                                delete errors[f.key];
+                                input.removeAttribute("aria-invalid");
+                            });
+                            const entry = element("div", undefined, "entry");
+                            entry.append(input);
+                            if (f.generate && !f.configured && !f.external) {
+                                const button = element(
+                                    "button",
+                                    generated.has(f.key) ? "Undo generation" : "Generate",
+                                    "generate",
+                                );
+                                button.type = "button";
+                                button.addEventListener("click", () => {
+                                    if (generated.has(f.key)) generated.delete(f.key);
+                                    else {
+                                        generated.add(f.key);
+                                        delete values[f.key];
+                                    }
+                                    show();
+                                });
+                                entry.append(button);
+                            }
+                            row.append(entry);
+                            const help = element(
+                                "small",
+                                (f.external
+                                    ? "Managed by the host environment. Change it through the host settings. "
+                                    : f.configured
+                                      ? "Configured. Existing values are never displayed. "
+                                      : "") + (f.help || ""),
+                            );
+                            help.id = f.key + "-help";
+                            row.append(help, element("small", f.key, "key"));
+                            if (errors[f.key]) row.append(element("small", errors[f.key], "error"));
+                            $("fields").append(row);
+                        }
+                    if (focus) $("title").focus();
+                }
+                $("back").addEventListener("click", () => {
+                    if (step > 0) {
+                        step--;
+                        show(true);
+                    }
+                });
+                $("form").addEventListener("submit", async (event) => {
+                    event.preventDefault();
+                    if (saving) return;
+                    if (step < groups.length) {
+                        step++;
+                        show(true);
+                        return;
+                    }
+                    if (!$("acknowledged").checked) {
+                        alert("Please acknowledge the one-time setup before saving.");
+                        return;
+                    }
+                    saving = true;
+                    alert("");
+                    show();
+                    try {
+                        const data = await api("POST", {
+                            values,
+                            generate: [...generated],
+                            acknowledged: true,
+                        });
+                        token = "";
+                        for (const key of Object.keys(values)) delete values[key];
+                        generated.clear();
+                        $("wizard").replaceChildren();
+                        $("wizard").className = "paper completion";
+                        $("wizard").append(
+                            element("h2", "Your first page is ready."),
+                            element("p", data.message),
+                            element(
+                                "p",
+                                "Keep .env and .setup out of Git. If services are managed by your host, configure them there before deploying.",
+                            ),
+                        );
+                    } catch (error) {
+                        saving = false;
+                        errors = error.fields || {};
+                        const first = fields.find((f) => errors[f.key]);
+                        if (first) step = groups.findIndex((g) => g[0] === first.group);
+                        show(true);
+                        alert(error.message);
+                    }
+                });
+                if (!token) {
+                    $("loading").hidden = true;
+                    alert("Open the complete private link from your installation terminal.");
+                    return;
+                }
+                api("GET")
+                    .then((data) => {
+                        groups = data.groups;
+                        fields = data.fields;
+                        for (const f of fields)
+                            if (f.required && f.generate && !f.configured && !f.external)
+                                generated.add(f.key);
+                        $("loading").hidden = true;
+                        $("wizard").hidden = false;
+                        show();
+                    })
+                    .catch((error) => {
+                        $("loading").hidden = true;
+                        alert(error.message);
+                    });
+            })();
+        </script>
+    </body>
+</html>

@@ -1,0 +1,35 @@
+.legal-links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 20px;
+    font: inherit;
+    font-size: 11px;
+    line-height: 1.8;
+}
+
+.legal-links a {
+    text-decoration: underline;
+    text-decoration-color: #9bac8b;
+    text-underline-offset: 4px;
+}
+
+.legal-links a:hover {
+    color: var(--ink);
+}
+
+.landing-footer > .legal-links,
+.shell footer > .legal-links {
+    flex-basis: 100%;
+    justify-content: center;
+    padding: 8px 0;
+}
+
+.auth-card > .legal-links {
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.account-settings .legal-links {
+    margin: 20px 0 10px;
+}

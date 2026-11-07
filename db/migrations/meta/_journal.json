@@ -1,0 +1,90 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1793860960881,
+      "tag": "0000_breezy_drax",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1793867435039,
+      "tag": "0001_melted_steve_rogers",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1793869936849,
+      "tag": "0002_nice_inertia",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1793879788056,
+      "tag": "0003_perfect_paper_doll",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1793959294283,
+      "tag": "0004_relational_notebooks",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1793966203941,
+      "tag": "0005_marketplace_refresh_lease",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1793967256410,
+      "tag": "0006_marketplace_sync_queue",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1793969330775,
+      "tag": "0007_physical_supplier_returns",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1793981687692,
+      "tag": "0008_account_deletion",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1793982229921,
+      "tag": "0009_account_cleanup_barrier",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1794018590581,
+      "tag": "0010_upload_reservations",
+      "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "7",
+      "when": 1794020765123,
+      "tag": "0011_account_tour_completion",
+      "breakpoints": true
+    }
+  ]
+}

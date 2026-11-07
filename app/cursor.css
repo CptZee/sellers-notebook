@@ -1,0 +1,128 @@
+.cursor-toggle {
+    position: fixed;
+    bottom: 16px;
+    right: 18px;
+    z-index: 40;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    min-height: 36px;
+    padding: 8px 12px;
+    border: 1px solid #bfc8ae;
+    border-radius: 5px 10px 5px 5px;
+    background: #f5f1df;
+    color: #4c6549;
+    box-shadow: 2px 3px 0 #596c3520;
+    font: inherit;
+    font-size: 11px;
+}
+
+html[data-theme="dark"] .cursor-toggle {
+    background: #2c3731;
+    color: #d6e4cf;
+    border-color: #52674d;
+}
+
+@media (max-width: 760px) {
+    .cursor-toggle {
+        bottom: 10px;
+        right: 10px;
+        min-height: 36px;
+        padding: 8px 10px;
+        font-size: 10px;
+    }
+}
+/* Native cursors follow actual control state, with the graphite tip as hotspot. */
+@media (hover: hover) and (pointer: fine) and (forced-colors: none) {
+    html:not([data-cursor="off"]),
+    html:not([data-cursor="off"]) body {
+        cursor:
+            url("/cursors/pencil.svg") 3 29,
+            auto;
+    }
+
+    html:not([data-cursor="off"])
+        :is(
+            a[href],
+            button,
+            summary,
+            select,
+            label[for],
+            [role="button"],
+            [role="tab"],
+            [role="switch"],
+            [role="checkbox"],
+            [role="menuitem"],
+            input[type="button"],
+            input[type="submit"],
+            input[type="reset"],
+            input[type="checkbox"],
+            input[type="radio"],
+            input[type="file"],
+            input[type="range"],
+            input[type="color"],
+            .upload-button
+        ) {
+        cursor:
+            url("/cursors/pencil-link.svg") 3 29,
+            pointer !important;
+    }
+
+    html:not([data-cursor="off"])
+        :is(
+            input:not([type]),
+            input[type="text"],
+            input[type="email"],
+            input[type="password"],
+            input[type="search"],
+            input[type="tel"],
+            input[type="url"],
+            input[type="number"],
+            textarea,
+            [contenteditable="true"],
+            [role="textbox"]
+        ) {
+        cursor: text !important;
+    }
+
+    html:not([data-cursor="off"]) :is(:disabled, [aria-disabled="true"], label:has(input:disabled)),
+    html:not([data-cursor="off"])
+        :is(:disabled, [aria-disabled="true"], label:has(input:disabled))
+        * {
+        cursor:
+            url("/cursors/pencil-disabled.svg") 3 29,
+            not-allowed !important;
+    }
+
+    html:not([data-cursor="off"]) [aria-busy="true"],
+    html:not([data-cursor="off"]) [aria-busy="true"] * {
+        cursor:
+            url("/cursors/pencil-busy.svg") 3 29,
+            progress !important;
+    }
+}
+
+.cursor-toggle.cursor-toggle-inline {
+    position: static;
+    z-index: auto;
+    width: fit-content;
+    margin-top: 12px;
+}
+
+.cursor-preference {
+    border-top: 1px dashed var(--line);
+    margin-top: 24px;
+    padding-top: 20px;
+}
+
+.cursor-preference h3 {
+    font-family: var(--hand);
+    font-size: 25px;
+    margin: 0 0 7px;
+}
+
+.cursor-preference p {
+    font-size: 12px;
+    line-height: 1.8;
+    color: var(--muted);
+}
