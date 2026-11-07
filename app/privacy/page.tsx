@@ -1,10 +1,10 @@
-import type { Metadata } from "next";
+import { publicPageMetadata } from "../../lib/site-metadata";
 import { LegalDocument, type LegalSection } from "../../components/legal-document";
-export const metadata: Metadata = {
-    title: "Privacy Policy — Seller’s Notebook",
-    description:
-        "How Seller’s Notebook handles account information, business records, files, marketplace connections and your privacy choices.",
-};
+export const metadata = publicPageMetadata(
+    "/privacy",
+    "Privacy Policy — Seller’s Notebook",
+    "How Seller’s Notebook handles account information, business records, files, marketplace connections and your privacy choices.",
+);
 const sections: LegalSection[] = [
     {
         id: "who-we-are",

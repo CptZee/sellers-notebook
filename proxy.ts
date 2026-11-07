@@ -1,7 +1,16 @@
 import { auth } from "./lib/auth/server";
 export default auth.middleware({
     loginUrl: "/auth/sign-in",
-    publicRoutes: ["/", "/terms", "/privacy", "/api", "/account/delete"],
+    publicRoutes: [
+        "/",
+        "/terms",
+        "/privacy",
+        "/api",
+        "/account/delete",
+        "/robots.txt",
+        "/sitemap.xml",
+        "/opengraph-image",
+    ],
 });
 // Attachment handlers check the session themselves. Keep multipart bodies out
 // of the page proxy so upload streams are not cloned before the handler reads them.

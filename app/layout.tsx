@@ -1,3 +1,4 @@
+import { siteUrl, siteName, siteTitle, siteDescription, shareImage } from "../lib/site-metadata";
 import type { Metadata } from "next";
 import "./globals.css";
 import "./notebook.css";
@@ -6,9 +7,26 @@ import "./cursor.css";
 import { CursorToggle } from "../components/cursor-toggle";
 import { SiteFooter } from "../components/site-footer";
 export const metadata: Metadata = {
-    title: "Seller’s Notebook — Your business, beautifully kept",
-    description:
-        "Your private business notebook for inventory, orders, expenses, suppliers, purchases, and pricing, with live sync across your signed-in devices.",
+    metadataBase: new URL(siteUrl),
+    applicationName: siteName,
+    title: siteTitle,
+    description: siteDescription,
+    robots: { index: false, follow: false },
+    openGraph: {
+        type: "website",
+        siteName,
+        locale: "en_PH",
+        url: siteUrl,
+        title: siteTitle,
+        description: siteDescription,
+        images: [shareImage],
+    },
+    twitter: {
+        card: "summary_large_image",
+        title: siteTitle,
+        description: siteDescription,
+        images: [shareImage],
+    },
 };
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
     return (

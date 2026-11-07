@@ -1,10 +1,10 @@
-import type { Metadata } from "next";
+import { publicPageMetadata } from "../../lib/site-metadata";
 import { LegalDocument, type LegalSection } from "../../components/legal-document";
-export const metadata: Metadata = {
-    title: "Terms & Conditions — Seller’s Notebook",
-    description:
-        "Terms for your Seller’s Notebook account, business records, storage and optional marketplace connections.",
-};
+export const metadata = publicPageMetadata(
+    "/terms",
+    "Terms & Conditions — Seller’s Notebook",
+    "Terms for your Seller’s Notebook account, business records, storage and optional marketplace connections.",
+);
 const sections: LegalSection[] = [
     {
         id: "using-your-notebook",

@@ -1,3 +1,10 @@
+import {
+    publicPageMetadata,
+    siteName,
+    siteUrl,
+    siteTitle,
+    siteDescription,
+} from "../lib/site-metadata";
 import { SiteFooter } from "../components/site-footer";
 import { LandingPreview } from "../components/landing-preview";
 import {
@@ -19,6 +26,40 @@ import {
 } from "lucide-react";
 import "./landing.css";
 import "./landing-sections.css";
+
+export const metadata = publicPageMetadata("/", siteTitle, siteDescription);
+
+const websiteSchema = {
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "WebSite",
+            "@id": siteUrl + "/#website",
+            name: siteName,
+            url: siteUrl + "/",
+            description: siteDescription,
+            inLanguage: "en-PH",
+        },
+        {
+            "@type": "WebApplication",
+            "@id": siteUrl + "/#app",
+            name: siteName,
+            url: siteUrl + "/",
+            description: siteDescription,
+            applicationCategory: "BusinessApplication",
+            operatingSystem: "Web",
+            browserRequirements: "Requires JavaScript and a modern web browser",
+            featureList: [
+                "Inventory management",
+                "Order tracking",
+                "Expense tracking",
+                "Supplier and purchase management",
+                "Pricing calculator",
+                "Live synchronization",
+            ],
+        },
+    ],
+};
 
 const routineSteps = [
     {
@@ -91,6 +132,12 @@ export default function Landing() {
                 </nav>
             </header>
             <main className="landing-main">
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                        __html: JSON.stringify(websiteSchema).replace(/</g, "\\u003c"),
+                    }}
+                />
                 <section className="landing-hero">
                     <div className="hero-copy">
                         <span className="landing-kicker">
