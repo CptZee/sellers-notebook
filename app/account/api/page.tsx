@@ -6,8 +6,9 @@ export default async function ApiAccess() {
     const { data } = await auth.getSession();
     if (!data?.user) redirect("/auth/sign-in");
     return (
-        <main className="auth-page">
-            <section className="card auth-card">
+        <main className="api-access">
+            <section className="api-access-panel">
+                <span className="api-access-eyebrow">DEVELOPER SETTINGS</span>
                 <h1>API access</h1>
                 <p>
                     Connect your own integration or mobile device to your notebook. Each key belongs

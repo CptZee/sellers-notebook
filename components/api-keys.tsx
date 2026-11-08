@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import "./api-keys.css";
 type Key = {
     id: string;
     name: string;
@@ -14,11 +15,20 @@ export function ApiKeys() {
         [error, setError] = useState("");
     const [token, setToken] = useState(""),
         [busy, setBusy] = useState(false);
+    const [loading, setLoading] = useState(true),
+        [loaded, setLoaded] = useState(false);
     async function load() {
-        const response = await fetch("/api/account/api-keys");
-        const data = await response.json();
-        if (!response.ok) throw Error(data.error);
-        setKeys(data.keys);
+        setLoading(true);
+        try {
+            const response = await fetch("/api/account/api-keys");
+            const data = await response.json();
+            if (!response.ok) throw Error(data.error);
+            setKeys(data.keys);
+            setLoaded(true);
+            setError("");
+        } finally {
+            setLoading(false);
+        }
     }
     useEffect(() => {
         load().catch(() => setError("Could not load API keys. Refresh to retry."));
@@ -63,7 +73,10 @@ export function ApiKeys() {
     }
     return (
         <>
-            <form onSubmit={create}>
+            <form
+                className="api-key-form"
+                onSubmit={create}
+            >
                 <p>
                     <label>
                         Key name{" "}
@@ -95,14 +108,33 @@ export function ApiKeys() {
                 </p>
                 <button
                     className="button primary"
-                    disabled={busy}
+                    disabled={busy || loading || !loaded}
                 >
                     Create API key
                 </button>
             </form>
-            {error && <p role="alert">{error}</p>}
+            {error && (
+                <div
+                    className="api-key-error"
+                    role="alert"
+                >
+                    <p>{error}</p>
+                    <button
+                        type="button"
+                        disabled={loading || busy}
+                        onClick={() =>
+                            load().catch(() => setError("Could not load API keys. Please retry."))
+                        }
+                    >
+                        Retry loading keys
+                    </button>
+                </div>
+            )}
             {token && (
-                <div role="status">
+                <div
+                    className="api-key-secret"
+                    role="status"
+                >
                     <p>Copy this key now. It will only be shown once. Keep it private.</p>
                     <textarea
                         aria-label="New API key"
@@ -120,9 +152,17 @@ export function ApiKeys() {
                 </div>
             )}
             <h2>Your keys</h2>
-            {!keys.length && <p>No API keys yet.</p>}
+            {loading && <p role="status">Loading your API keys…</p>}
+            {loaded && !loading && !error && !keys.length && (
+                <p className="api-key-empty">
+                    No API keys yet. Create one above to connect your integration or device.
+                </p>
+            )}
             {keys.map((key) => (
-                <div key={key.id}>
+                <div
+                    className="api-key-row"
+                    key={key.id}
+                >
                     <p>
                         <strong>{key.name}</strong> — {key.purpose},{" "}
                         {key.scope === "read" ? "read only" : "read and write"}
