@@ -1,0 +1,71 @@
+.api-docs {
+    max-width: 900px;
+    margin: auto;
+    padding: 48px 24px 64px;
+    line-height: 1.75;
+    overflow-wrap: anywhere;
+}
+
+.api-docs h1 {
+    margin: 8px 0 20px;
+    font-size: clamp(32px, 6vw, 48px);
+    line-height: 1.15;
+}
+
+.api-docs h2 {
+    margin-top: 40px;
+    scroll-margin-top: 24px;
+}
+
+.api-docs-eyebrow {
+    margin-top: 32px;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+}
+
+.api-docs-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 24px;
+    margin: 28px 0;
+    padding: 16px 0;
+    border-block: 1px solid #8ca38a66;
+}
+
+.api-docs pre {
+    overflow-x: auto;
+    padding: 20px;
+    border-radius: 12px;
+    background: #17251f;
+    color: #eff7ee;
+    line-height: 1.65;
+    font-size: 13px;
+}
+
+.api-docs-table {
+    overflow-x: auto;
+    margin-block: 20px;
+}
+
+.api-docs table {
+    width: 100%;
+    min-width: 600px;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.api-docs th,
+.api-docs td {
+    padding: 14px 12px;
+    border-bottom: 1px solid #8ca38a66;
+    vertical-align: top;
+}
+
+.api-docs a {
+    color: inherit;
+    text-underline-offset: 4px;
+}
+
+.api-docs code {
+    font-size: 0.9em;
+}

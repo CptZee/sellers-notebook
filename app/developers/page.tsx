@@ -1,4 +1,5 @@
 import { publicPageMetadata } from "../../lib/site-metadata";
+import "./developers.css";
 export const metadata = publicPageMetadata(
     "/developers",
     "Developer API — Seller’s Notebook",
@@ -6,15 +7,26 @@ export const metadata = publicPageMetadata(
 );
 export default function Developers() {
     return (
-        <main style={{ maxWidth: 850, margin: "auto", padding: "48px 24px" }}>
+        <main className="api-docs">
             <a href="/">Seller’s Notebook</a>
-            <h1>Developer API v1</h1>
+            <p className="api-docs-eyebrow">DEVELOPER RESOURCES · VERSION 1</p>
+            <h1>API documentation</h1>
             <p>
                 Public integrations and our dedicated mobile client share the account-scoped API at{" "}
                 <code>/api/v1</code>. Public availability does not make anyone’s business records
                 public.
             </p>
-            <h2>Getting access</h2>
+            <nav
+                className="api-docs-nav"
+                aria-label="API documentation sections"
+            >
+                <a href="#access">Getting access</a>
+                <a href="#examples">Quick start</a>
+                <a href="#resources">Resources</a>
+                <a href="#writes">Writing data</a>
+                <a href="#errors">Limits and errors</a>
+            </nav>
+            <h2 id="access">Getting access</h2>
             <p>
                 Sign in and open <a href="/account/api">API access</a>. Create a separate key for
                 each integration or mobile device. Choose read-only access unless it needs to change
@@ -27,75 +39,109 @@ export default function Developers() {
                 This initial release uses personal device keys; automated mobile sign-in and refresh
                 tokens are not provided.
             </p>
+            <h2 id="examples">Quick start</h2>
+            <p>
+                Set <code>NOTEBOOK_API_KEY</code> in your private environment, replace{" "}
+                <code>YOUR_HOST</code> with your installation’s hostname, and read your notebook:
+            </p>
             <pre
                 style={{ overflowX: "auto" }}
             >{`curl https://YOUR_HOST/api/v1/notebook \\\n  -H "Authorization: Bearer $NOTEBOOK_API_KEY"`}</pre>
-            <h2>Resources</h2>
+            <p>In a JavaScript server application, use the same Bearer key:</p>
+            <pre>
+                <code>{`const response = await fetch("https://YOUR_HOST/api/v1/notebook", {
+  headers: { Authorization: \`Bearer \${process.env.NOTEBOOK_API_KEY}\` },
+});
+const notebook = await response.json();
+if (!response.ok) throw new Error(notebook.error);
+console.log(notebook.revision, notebook.document.products);`}</code>
+            </pre>
+            <p>
+                The JSON response includes <code>user</code>, <code>document</code>,{" "}
+                <code>revision</code> and <code>updatedAt</code>. The document contains products,
+                orders, expenses, suppliers, purchase orders and record histories.
+            </p>
+            <h3>Read a page of inventory</h3>
+            <p>
+                Use the revision from your notebook response. Supported page sizes are 10, 25, 50
+                and 100; pages start at 1.
+            </p>
+            <pre>
+                <code>{`curl "https://YOUR_HOST/api/v1/notebook/inventory?revision=12&page=1&size=25" \\\n  -H "Authorization: Bearer $NOTEBOOK_API_KEY"`}</code>
+            </pre>
+            <h2 id="resources">Resources</h2>
             <p>
                 All paths below start with <code>/api/v1</code>. Write access includes read access.
             </p>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Path</th>
-                        <th>Methods</th>
-                        <th>Purpose</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <code>/notebook</code>
-                        </td>
-                        <td>GET, PUT, PATCH</td>
-                        <td>Read snapshot; replace document or apply changes</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <code>/notebook/manifest</code>
-                        </td>
-                        <td>GET</td>
-                        <td>Read notebook revision and metadata</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <code>/notebook/inventory</code>, <code>/notebook/orders</code>,{" "}
-                            <code>/notebook/expenses</code>, <code>/notebook/suppliers</code>
-                        </td>
-                        <td>GET</td>
-                        <td>Filtered, paginated lists</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <code>/notebook/record</code>
-                        </td>
-                        <td>GET, POST</td>
-                        <td>Read or change a product, expense or supplier</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <code>/notebook/order</code>, <code>/notebook/purchase</code>
-                        </td>
-                        <td>GET, POST</td>
-                        <td>Read records or run order and purchase commands</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <code>/notebook/stock</code>
-                        </td>
-                        <td>POST</td>
-                        <td>Run stock commands</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <code>/notebook/overview</code>, <code>/notebook/report</code>
-                        </td>
-                        <td>GET</td>
-                        <td>Business summaries and reports</td>
-                    </tr>
-                </tbody>
-            </table>
-            <h2>Revisions and writes</h2>
+            <div
+                className="api-docs-table"
+                tabIndex={0}
+                role="region"
+                aria-label="API resources"
+            >
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Path</th>
+                            <th>Methods</th>
+                            <th>Purpose</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <code>/notebook</code>
+                            </td>
+                            <td>GET, PUT, PATCH</td>
+                            <td>Read snapshot; replace document or apply changes</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <code>/notebook/manifest</code>
+                            </td>
+                            <td>GET</td>
+                            <td>Read notebook revision and metadata</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <code>/notebook/inventory</code>, <code>/notebook/orders</code>,{" "}
+                                <code>/notebook/expenses</code>, <code>/notebook/suppliers</code>
+                            </td>
+                            <td>GET</td>
+                            <td>Filtered, paginated lists</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <code>/notebook/record</code>
+                            </td>
+                            <td>GET, POST</td>
+                            <td>Read or change a product, expense or supplier</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <code>/notebook/order</code>, <code>/notebook/purchase</code>
+                            </td>
+                            <td>GET, POST</td>
+                            <td>Read records or run order and purchase commands</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <code>/notebook/stock</code>
+                            </td>
+                            <td>POST</td>
+                            <td>Run stock commands</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <code>/notebook/overview</code>, <code>/notebook/report</code>
+                            </td>
+                            <td>GET</td>
+                            <td>Business summaries and reports</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h2 id="writes">Revisions and writes</h2>
             <p>
                 First GET <code>/notebook</code> for the current <code>document</code> and{" "}
                 <code>revision</code>. PUT a JSON object containing that revision and your edited
@@ -107,13 +153,20 @@ export default function Developers() {
                 document is limited to 4,000,000 bytes.
             </p>
             <p>
+                For example, update your sidebar note with a read/write key. Replace <code>12</code>{" "}
+                with the revision you just read:
+            </p>
+            <pre>
+                <code>{`curl -X PATCH "https://YOUR_HOST/api/v1/notebook" \\\n  -H "Authorization: Bearer $NOTEBOOK_API_KEY" \\\n  -H "Content-Type: application/json" \\\n  --data '{"revision":12,"changes":{"sidebarNote":"My integration is connected"}}'`}</code>
+            </pre>
+            <p>
                 For paginated resources, send <code>revision</code> from the latest notebook read,{" "}
                 <code>page</code> (starting at 1), <code>size</code> and optional{" "}
                 <code>search</code>. On 409, fetch the latest notebook and reconcile your changes
                 before retrying. Do not retry commands blindly after a network interruption: inspect
                 the saved records first.
             </p>
-            <h2>Limits and errors</h2>
+            <h2 id="errors">Limits and errors</h2>
             <p>
                 Each key allows 60 requests per minute across all server instances. A 429 response
                 includes <code>Retry-After: 60</code>. Errors use a JSON <code>error</code> message:

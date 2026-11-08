@@ -10,6 +10,12 @@ export function SiteFooter({ fallback = false }: { fallback?: boolean }) {
         <footer className="site-footer">
             <div className="site-footer-row">
                 <span className="site-footer-tagline">Your business, beautifully kept.</span>
+                <a
+                    className="site-footer-api"
+                    href="/developers"
+                >
+                    API documentation
+                </a>
                 <LegalLinks />
             </div>
             <MakerCredit />

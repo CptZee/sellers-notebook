@@ -22,6 +22,12 @@ footer.site-footer {
     line-height: 1.6;
 }
 
+.site-footer-api {
+    color: inherit;
+    font-size: 14px;
+    text-underline-offset: 3px;
+}
+
 .site-footer-row > .legal-links {
     justify-content: flex-end;
     flex-basis: auto;
