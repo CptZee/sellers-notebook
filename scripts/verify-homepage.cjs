@@ -10,46 +10,20 @@ const base = process.env.VERIFY_BASE_URL || "http://127.0.0.1:3000";
             page = await context.newPage(),
             errors = [];
         page.on("pageerror", (e) => errors.push(e.message));
-        const asset = await context.request.get(base + "/media/sellers-notebook-landing-loop.mp4");
-        assert.equal(asset.status(), 200, "Preview must be public");
-        assert.match(asset.headers()["content-type"], /video\/mp4/);
-        assert.ok((await asset.body()).length < 5000000);
-        checks.push("Public MP4 and poster");
-        const poster = await context.request.get(
+        const previewAsset = await context.request.get(
             base + "/media/sellers-notebook-landing-poster.jpg",
         );
-        assert.equal(poster.status(), 200);
-        assert.match(poster.headers()["content-type"], /image\/jpeg/);
+        assert.equal(previewAsset.status(), 200, "Preview must be public");
+        assert.match(previewAsset.headers()["content-type"], /image\/jpeg/);
         await page.goto(base);
-        await page.locator("video").waitFor();
-        await page.waitForFunction(
-            () => {
-                const v = document.querySelector("video");
-                return v.readyState >= 3 && !v.paused && v.currentTime > 0.3;
-            },
-            { timeout: 30000 },
+        assert.equal(await page.locator("video").count(), 0);
+        const preview = page.locator(".landing-preview img");
+        await preview.waitFor();
+        assert.equal(
+            await preview.evaluate((image) => image.complete && image.naturalWidth > 0),
+            true,
         );
-        const video = page.locator("video");
-        assert.deepEqual(
-            await video.evaluate((v) => ({
-                muted: v.muted,
-                loop: v.loop,
-                inline: v.playsInline,
-                controls: v.controls,
-                width: v.videoWidth,
-                height: v.videoHeight,
-            })),
-            { muted: true, loop: true, inline: true, controls: true, width: 1920, height: 1080 },
-        );
-        checks.push("Muted inline autoplay with controls at 1920×1080");
-        await video.evaluate((v) => {
-            v.currentTime = v.duration - 0.15;
-        });
-        await page.waitForFunction(() => document.querySelector("video").currentTime < 2);
-        checks.push("Playback loops");
-        await video.evaluate((v) => v.pause());
-        assert.equal(await video.evaluate((v) => v.paused), true);
-        checks.push("Playback can pause");
+        checks.push("Public static preview; no video player");
         assert.equal(await page.locator(".landing-features > div").count(), 6);
         for (const text of [
             "The little costs count, too.",
@@ -73,24 +47,12 @@ const base = process.env.VERIFY_BASE_URL || "http://127.0.0.1:3000";
                 await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1),
                 `Overflow at ${width}px`,
             );
-            const box = await video.boundingBox();
+            const box = await preview.boundingBox();
             assert.ok(box.width <= width);
             if (width === 390)
                 await page.screenshot({ path: "verification/homepage-mobile.png", fullPage: true });
         }
         checks.push("No horizontal overflow at 320, 390, 768, 1440 and 1920px");
-        const reduced = await browser.newContext({
-                viewport: { width: 390, height: 844 },
-                reducedMotion: "reduce",
-            }),
-            rp = await reduced.newPage();
-        await rp.goto(base);
-        await rp.locator("video").waitFor();
-        await rp.waitForTimeout(800);
-        assert.equal(await rp.locator("video").evaluate((v) => v.paused && !v.autoplay), true);
-        await rp.locator("video").evaluate((v) => v.play());
-        await rp.waitForFunction(() => document.querySelector("video").currentTime > 0);
-        checks.push("Reduced motion disables autoplay and allows manual play");
         const protectedPage = await context.request.get(base + "/notebook");
         assert.ok(protectedPage.url().includes("/auth/sign-in"));
         assert.equal((await context.request.get(base + "/api/notebook/manifest")).status(), 401);

@@ -40,7 +40,7 @@
     min-width: 0;
 }
 
-.landing-preview video {
+.landing-preview img {
     display: block;
     width: 100%;
     height: auto;

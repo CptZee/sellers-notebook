@@ -43,7 +43,6 @@ verification/**/*.webp
 verification/**/*.json
 verification/**/*.log
 verification/**/*.txt
-promo/audio/*-loudness.txt
 
 # Local logs and operating-system files
 *.log
@@ -51,5 +50,4 @@ promo/audio/*-loudness.txt
 Thumbs.db
 Desktop.ini
 
-# Website assets, promotional sources, migrations and dependency lockfiles stay versionable.
-# promo/.gitignore handles its private session, raw footage and generated exports.
+# Website assets, migrations and dependency lockfiles stay versionable.

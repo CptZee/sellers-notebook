@@ -127,10 +127,6 @@ Additional `verify:*` commands are listed in `package.json`. Some create disposa
 | Supplier goods returns                          | [Supplier returns](documents/supplier-returns.md)             |
 | Focus and keyboard acceptance                   | [Keyboard checks](documents/keyboard.md)                      |
 
-## Promotional videos
-
-The homepage uses the silent 15-second loop in `public/media/`. Promotional source code, approved storyboards, narration/music information and rebuild instructions are maintained in [the video library](documents/promotional-videos.md). Its generated exports are ignored separately from the public website assets needed for deployment.
-
 ## Support and policies
 
 Public policies are served at `/terms` and `/privacy`. Support: [ajmission28@gmail.com](mailto:ajmission28@gmail.com).

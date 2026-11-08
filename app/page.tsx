@@ -269,8 +269,7 @@ export default function Landing() {
                         </div>
                         <p>
                             Six useful pages. One calm place.
-                            <br />
-                            See your notebook in action.
+                            <br />A glimpse of your business dashboard.
                         </p>
                     </div>
                     <LandingPreview />
