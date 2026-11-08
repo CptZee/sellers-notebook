@@ -1,17 +1,33 @@
 const fs = require("node:fs");
+const { parseEnv } = require("node:util");
+const { assertTestDatabaseTarget } = require("./migration-target.cjs");
 const { Pool, neonConfig } = require("@neondatabase/serverless");
 const { readMigrationFiles } = require("drizzle-orm/migrator");
 neonConfig.webSocketConstructor = WebSocket;
 const storageTest = process.argv.includes("--storage-test-branch"),
-    test = process.argv.includes("--test-branch") || storageTest;
+    apiTest = process.argv.includes("--api-test-branch"),
+    test = process.argv.includes("--test-branch") || storageTest || apiTest;
 if (test) {
     const content = fs.readFileSync(
-        storageTest ? ".env.storage-test" : ".env.migration-test",
+        apiTest ? ".env.api-test" : storageTest ? ".env.storage-test" : ".env.migration-test",
         "utf8",
     );
-    process.env.DATABASE_URL_UNPOOLED = content.match(/^DATABASE_URL_UNPOOLED=(.+)$/m)[1].trim();
+    const target = parseEnv(content).DATABASE_URL_UNPOOLED;
+    if (!target) throw Error("The test environment is missing DATABASE_URL_UNPOOLED.");
+    const productionConnections = [process.env.DATABASE_URL, process.env.DATABASE_URL_UNPOOLED];
+    for (const file of [".env", ".env.local", ".env.production", ".env.production.local"]) {
+        if (!fs.existsSync(file)) continue;
+        const env = parseEnv(fs.readFileSync(file, "utf8"));
+        productionConnections.push(env.DATABASE_URL, env.DATABASE_URL_UNPOOLED);
+    }
+    assertTestDatabaseTarget(target, productionConnections);
+    process.env.DATABASE_URL_UNPOOLED = target;
 } else require("@next/env").loadEnvConfig(process.cwd());
-const pool = new Pool({ connectionString: process.env.DATABASE_URL_UNPOOLED });
+const pool = new Pool({
+    connectionString: process.env.DATABASE_URL_UNPOOLED,
+    connectionTimeoutMillis: 10000,
+});
+pool.on("error", () => console.error("Database connection interrupted."));
 const normalize = (value) =>
     Array.isArray(value)
         ? value.map(normalize)
@@ -119,4 +135,12 @@ const normalize = (value) =>
         client.release();
         await pool.end();
     }
-})();
+})().catch(async (error) => {
+    console.error(
+        "Migration connection failed:",
+        error.message ||
+            "Could not reach the configured database. Check that its branch still exists and its credentials are current.",
+    );
+    process.exitCode = 1;
+    await pool.end().catch(() => {});
+});

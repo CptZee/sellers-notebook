@@ -14,6 +14,24 @@ This is a custom **source-available** license, not an [OSI open-source license](
 
 ## Install and set up
 
+Public integrations and personal mobile-device access use the versioned `/api/v1` API.
+Read `/developers` for supported resources and examples, and sign in at `/account/api`
+to create or revoke a read-only or read/write key. Each key expires after 90 days and
+allows 60 requests per minute. Mobile access currently uses individual device keys;
+automated mobile sign-in and refresh tokens are not yet provided. Never embed a shared
+account key in a mobile application.
+
+Apply the `0012_public_api_keys` migration before using API access. This public
+edition keeps its existing free access and unlimited total file storage; no billing,
+subscription plans or storage quotas are introduced. Test migrations against an
+isolated database before running `npm run db:migrate` in production.
+Run `npm run verify:public-api` for API access-control checks and `npm test` for the
+credential, request-size and migration-target checks.
+For isolated API database verification, put its direct connection in
+`DATABASE_URL_UNPOOLED` in a private `.env.api-test` file, then run
+`node scripts/migrate-relational.cjs --api-test-branch`. Test mode rejects endpoints
+that match the configured production database.
+
 Use Node.js 22 or newer and npm. Provision the Neon services for your installation first: Postgres, Managed Auth, Realtime and a private `assets` bucket. Their configuration is declared in `neon.ts`; the installer accepts the credentials supplied by those services and does not provision them for you.
 
 ```sh

@@ -1,6 +1,9 @@
 import { accountDeleting } from "./account-lifecycle";
 import { auth } from "./auth/server";
+import { apiContext } from "./api-context";
 export async function sessionUser(request: Request) {
+    const apiUser = apiContext.getStore();
+    if (apiUser) return (await accountDeleting(apiUser.id)) ? null : apiUser;
     const { data } = await auth.getSession();
     const user = data?.user;
     if (!user) return null;
@@ -27,6 +30,7 @@ export const json = (data: unknown, status = 200) => {
     });
 };
 export function sameOrigin(request: Request) {
+    if (apiContext.getStore()) return true;
     // Next may use an internal hostname in request.url. Host retains the browser's
     // authority; browsers cannot override it when sending a cross-origin request.
     try {

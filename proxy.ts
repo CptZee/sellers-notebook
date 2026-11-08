@@ -5,6 +5,7 @@ export default auth.middleware({
         "/",
         "/terms",
         "/privacy",
+        "/developers",
         "/api",
         "/account/delete",
         "/robots.txt",
@@ -17,6 +18,6 @@ export default auth.middleware({
 // Public homepage media and cursor images must load for signed-out visitors.
 export const config = {
     matcher: [
-        "/((?!_next/static|_next/image|icon.svg|favicon.ico|media/|cursors/|api/health|api/attachments|api/profile-picture).*)",
+        "/((?!_next/static|_next/image|icon.svg|favicon.ico|media/|cursors/|api/health|api/attachments|api/profile-picture|api/v1(?:/|$)).*)",
     ],
 };

@@ -10,6 +10,9 @@ export default async function Account() {
                 <h1>Your notebook account</h1>
                 <p>{data.user.name}</p>
                 <p>{data.user.email}</p>
+                <p>
+                    <a href="/account/api">Manage API access</a>
+                </p>
                 <a
                     className="button primary"
                     href="/notebook"

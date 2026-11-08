@@ -31,6 +31,26 @@ export const notebooks = pgTable("seller_notebooks", {
         .notNull()
         .defaultNow(),
 });
+export const apiKeys = pgTable("seller_api_keys", {
+    id: uuid("id").primaryKey().defaultRandom(),
+    owner_id: text("owner_id")
+        .notNull()
+        .references(() => notebooks.owner_id, { onDelete: "cascade" }),
+    name: text("name").notNull(),
+    purpose: text("purpose").notNull(),
+    scope: text("scope").notNull(),
+    token_hash: text("token_hash").notNull().unique(),
+    prefix: text("prefix").notNull(),
+    created_at: timestamp("created_at", { withTimezone: true, mode: "string" })
+        .notNull()
+        .defaultNow(),
+    expires_at: timestamp("expires_at", { withTimezone: true, mode: "string" }).notNull(),
+    revoked_at: timestamp("revoked_at", { withTimezone: true, mode: "string" }),
+    window_start: timestamp("window_start", { withTimezone: true, mode: "string" })
+        .notNull()
+        .defaultNow(),
+    request_count: integer("request_count").notNull().default(0),
+});
 export const storageReservations = pgTable(
     "seller_storage_reservations",
     {
