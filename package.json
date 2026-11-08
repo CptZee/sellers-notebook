@@ -2,6 +2,7 @@
   "name": "sellers-notebook",
   "version": "1.0.0",
   "private": true,
+  "license": "SEE LICENSE IN LICENSE",
   "scripts": {
     "dev": "next dev --hostname 127.0.0.1",
     "build": "next build",

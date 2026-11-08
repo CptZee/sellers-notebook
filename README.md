@@ -4,6 +4,14 @@
 
 The free edition of a private business notebook for small sellers, built with Next.js, React, TypeScript and Neon. Keep inventory, orders, expenses, suppliers, purchases and pricing together, with private attachments and live synchronization across signed-in devices.
 
+## License
+
+Seller’s Notebook is **free to use for personal use and your own business’s internal operations** under the [Seller’s Notebook Free Use License 1.0](LICENSE).
+
+You may self-host it, modify it and share copies for free. You may use it to manage a shop and earn money from your own goods or services. You may **not sell the software or modified versions, charge for hosted access, subscriptions or software features, or monetize redistributed versions** without separate written permission. Free copies and forks must retain the license and notices.
+
+This is a custom **source-available** license, not an [OSI open-source license](https://opensource.org/osd). Your business data remains yours; dependencies and third-party materials keep their own licenses. The copyright owner may separately offer paid hosting or grant commercial permissions. For those permissions, contact [ajmission28@gmail.com](mailto:ajmission28@gmail.com). The full license controls over this summary.
+
 ## Install and set up
 
 Use Node.js 22 or newer and npm. Provision the Neon services for your installation first: Postgres, Managed Auth, Realtime and a private `assets` bucket. Their configuration is declared in `neon.ts`; the installer accepts the credentials supplied by those services and does not provision them for you.
