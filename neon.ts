@@ -3,7 +3,13 @@ import { defineConfig } from "@neon/config/v1";
 export default defineConfig({
     // Declare your Neon services here
     preview: {
-        realtime: { allowedOrigins: ["http://127.0.0.1:3000", "http://localhost:3000"] },
+        realtime: {
+            allowedOrigins: [
+                "http://127.0.0.1:3000",
+                "http://localhost:3000",
+                "https://ntbk.ajmission.dev",
+            ],
+        },
     },
     auth: true,
     buckets: {
