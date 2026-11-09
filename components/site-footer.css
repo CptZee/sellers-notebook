@@ -22,10 +22,26 @@ footer.site-footer {
     line-height: 1.6;
 }
 
-.site-footer-api {
+.site-footer .legal-links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 36px;
+    padding: 4px 0;
     color: inherit;
-    font-size: 14px;
-    text-underline-offset: 3px;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    cursor: pointer;
+}
+
+.site-footer .legal-links a:hover {
+    color: var(--ink);
+    text-decoration-thickness: 2px;
+}
+
+.site-footer .legal-links a:focus-visible {
+    outline: 2px solid #78966b;
+    outline-offset: 4px;
+    border-radius: 2px;
 }
 
 .site-footer-row > .legal-links {
