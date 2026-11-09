@@ -133,10 +133,6 @@ body {
     gap: 8px;
 }
 
-.developer-api-nav {
-    text-decoration: none;
-}
-
 .nav-item:nth-child(2) {
     --tab: #e7eddd;
 }
