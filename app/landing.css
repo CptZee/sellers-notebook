@@ -783,6 +783,7 @@
 
 @media (max-width: 760px) {
     .landing-nav {
+        flex-wrap: wrap;
         padding: 20px 22px;
         gap: 12px;
     }
@@ -793,8 +794,14 @@
     }
 
     .landing-nav nav {
+        width: 100%;
+        justify-content: flex-end;
         gap: 15px;
         font-size: 11px;
+    }
+
+    .landing-nav .landing-developer {
+        margin-right: auto;
     }
 
     .landing-about {

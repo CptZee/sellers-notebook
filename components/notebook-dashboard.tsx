@@ -48,6 +48,7 @@ import {
     UserRound,
     ReceiptText,
     Truck,
+    Code2,
 } from "lucide-react";
 
 import { reschedulePurchase, deliveryCounts } from "../lib/delivery-reminders.mjs";
@@ -1461,6 +1462,13 @@ export default function Home() {
                             )}
                         </button>
                     ))}
+                    <a
+                        className="nav-item developer-api-nav"
+                        href="/developers"
+                    >
+                        <Code2 size={19} />
+                        Developer API
+                    </a>
                 </nav>
                 <div className="sidebar-note personal-note">
                     <label htmlFor="sidebar-personal-note">

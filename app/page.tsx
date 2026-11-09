@@ -121,6 +121,12 @@ export default function Landing() {
                     >
                         Free notebook
                     </a>
+                    <a
+                        className="landing-developer"
+                        href="/developers"
+                    >
+                        Developer API
+                    </a>
                     <a href="/auth/sign-in">Sign in</a>
                     <a
                         className="button primary"
